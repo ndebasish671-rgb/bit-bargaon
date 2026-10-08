@@ -2874,22 +2874,25 @@
         </div>
 
         <div class="dues-actions-bar">
-          <div>
+          <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
             ${student.txnHistory && student.txnHistory.length > 0 ? `
               <button class="btn-outline-sm" onclick="showLatestReceipt('${student.roll}')" style="background: white;">
-                📄 View Last Receipt (${student.txnHistory[student.txnHistory.length - 1].receiptNo})
+                📄 View Fee Slip (${student.txnHistory[student.txnHistory.length - 1].receiptNo})
               </button>
             ` : ''}
+            <a href="${getSheetSpreadsheetUrl()}" target="_blank" rel="noopener" class="btn-outline-sm" style="background: #f0fdf4; color: #15803d; border-color: #86efac; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+              📊 Open in Google Sheets Ledger
+            </a>
           </div>
           <div>
             ${!isCleared ? `
-              <button class="btn-primary" onclick="openPaymentGatewayModal('${student.roll}')" style="padding: 12px 28px; font-size: 1rem; border-radius: 50px;">
-                💳 Pay Outstanding Fees Online (₹${student.dues.toLocaleString('en-IN')})
-              </button>
+              <div style="font-size: 0.88rem; color: #b91c1c; background: #fee2e2; border: 1px solid #fecaca; padding: 8px 16px; border-radius: 50px; font-weight: 700;">
+                ⚠️ Pending Dues: ₹${student.dues.toLocaleString('en-IN')} (Pay at Accounts Office)
+              </div>
             ` : `
-              <button class="btn-primary" style="background: #10b981; cursor: default; border: none; padding: 12px 28px; border-radius: 50px;" disabled>
-                ✓ All Fees Cleared
-              </button>
+              <div style="font-size: 0.88rem; color: #15803d; background: #dcfce7; border: 1px solid #bbf7d0; padding: 8px 16px; border-radius: 50px; font-weight: 700;">
+                ✓ All Fees Cleared for this Semester
+              </div>
             `}
           </div>
         </div>
@@ -2898,166 +2901,12 @@
   }
 
   // Open Payment Gateway Modal
-  function openPaymentGatewayModal(roll) {
-    const db = getStudentFeeDB();
-    const student = db.find(s => s.roll === roll);
-    if (!student) return;
+  
 
-    currentActiveStudent = student;
-    document.getElementById('payStudentName').textContent = student.name;
-    document.getElementById('payStudentRoll').textContent = student.roll + ` (${student.branch})`;
-    document.getElementById('payStudentDues').textContent = '₹' + student.dues.toLocaleString('en-IN');
-    document.getElementById('paymentSubtitle').textContent = `Paying semester & hostel dues for ${student.name}`;
-    
-    const payAmtInput = document.getElementById('payAmountInput');
-    payAmtInput.value = student.dues;
-    payAmtInput.max = student.dues;
-
-    document.getElementById('paymentModal').classList.add('open');
-  }
-
-  function switchPayMethodUI(method) {
-    const upiBox = document.getElementById('upiPayBox');
-    if (method === 'UPI') {
-      upiBox.innerHTML = `
-        <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
-          <div style="background: white; padding: 8px; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid #cbd5e1;">
-            <svg width="90" height="90" viewBox="0 0 100 100">
-              <rect width="100" height="100" fill="white"/>
-              <rect x="10" y="10" width="30" height="30" fill="#102a54"/>
-              <rect x="16" y="16" width="18" height="18" fill="white"/>
-              <rect x="20" y="20" width="10" height="10" fill="#102a54"/>
-              <rect x="60" y="10" width="30" height="30" fill="#102a54"/>
-              <rect x="66" y="16" width="18" height="18" fill="white"/>
-              <rect x="70" y="20" width="10" height="10" fill="#102a54"/>
-              <rect x="10" y="60" width="30" height="30" fill="#102a54"/>
-              <rect x="16" y="66" width="18" height="18" fill="white"/>
-              <rect x="20" y="70" width="10" height="10" fill="#102a54"/>
-              <rect x="46" y="15" width="8" height="8" fill="#102a54"/>
-              <rect x="46" y="30" width="8" height="8" fill="#102a54"/>
-              <rect x="46" y="46" width="18" height="18" fill="#e67e22"/>
-              <rect x="70" y="46" width="14" height="8" fill="#102a54"/>
-              <rect x="70" y="66" width="14" height="20" fill="#102a54"/>
-              <rect x="46" y="72" width="18" height="14" fill="#102a54"/>
-            </svg>
-          </div>
-          <div style="text-align: left; font-size: 0.85rem; color: #166534;">
-            <strong style="display: block; font-size: 0.95rem; color: #15803d;">Official UPI ID:</strong>
-            <code>bitbargaon.fee@sbi</code>
-            <p style="margin-top: 5px; font-size: 0.78rem; color: #4b5563;">Scan with GPay, PhonePe, or Paytm to complete instant bank transfer.</p>
-          </div>
-        </div>
-      `;
-    } else if (method === 'NETBANKING') {
-      upiBox.innerHTML = `
-        <div style="text-align: left; font-size: 0.88rem; color: var(--text-main);">
-          <strong style="display: block; margin-bottom: 8px;">Select Bank for Net Banking:</strong>
-          <select style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
-            <option>State Bank of India (SBI)</option>
-            <option>HDFC Bank</option>
-            <option>ICICI Bank</option>
-            <option>Punjab National Bank</option>
-            <option>Axis Bank</option>
-            <option>Bank of Baroda</option>
-            <option>Canara Bank</option>
-          </select>
-          <div style="margin-top: 8px; font-size: 0.78rem; color: #64748b;">You will be securely routed to your bank's portal to authorize.</div>
-        </div>
-      `;
-    } else {
-      upiBox.innerHTML = `
-        <div style="text-align: left; font-size: 0.85rem; color: var(--text-main);">
-          <div style="margin-bottom: 8px;">
-            <label style="display: block; font-size: 0.78rem; font-weight: 600;">Card Number</label>
-            <input type="text" placeholder="XXXX XXXX XXXX XXXX" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-            <div>
-              <label style="display: block; font-size: 0.78rem; font-weight: 600;">Expiry</label>
-              <input type="text" placeholder="MM/YY" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
-            </div>
-            <div>
-              <label style="display: block; font-size: 0.78rem; font-weight: 600;">CVV</label>
-              <input type="password" placeholder="•••" maxlength="3" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
-            </div>
-          </div>
-        </div>
-      `;
-    }
-  }
+  
 
   // Handle Payment Process
-  function handleProcessPayment(e) {
-    e.preventDefault();
-    if (!currentActiveStudent) return;
-
-    const payAmount = parseInt(document.getElementById('payAmountInput').value, 10);
-    if (isNaN(payAmount) || payAmount <= 0) {
-      alert('Please enter a valid payment amount.');
-      return;
-    }
-
-    const payMethod = document.querySelector('input[name="payMethod"]:checked')?.value || 'Online UPI';
-
-    const btn = document.getElementById('btnConfirmPay');
-    btn.textContent = 'Processing Bank Verification...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      // Update database
-      const db = getStudentFeeDB();
-      const studentIndex = db.findIndex(s => s.roll === currentActiveStudent.roll);
-
-      if (studentIndex !== -1) {
-        const student = db[studentIndex];
-        const actualPayment = Math.min(payAmount, student.dues);
-        
-        student.paid += actualPayment;
-        student.dues = Math.max(0, student.totalFee - student.paid);
-        student.status = student.dues === 0 ? "Cleared" : "Partial";
-        student.lastPaymentDate = new Date().toISOString().split('T')[0];
-
-        const receiptId = 'REC-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900);
-        const txnId = payMethod.substring(0, 3).toUpperCase() + Math.floor(100000000 + Math.random() * 900000000);
-
-        const receiptObj = {
-          receiptNo: receiptId,
-          date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
-          amount: actualPayment,
-          mode: payMethod,
-          txnId: txnId,
-          balanceDues: student.dues
-        };
-
-        if (!student.txnHistory) student.txnHistory = [];
-        student.txnHistory.push(receiptObj);
-
-        db[studentIndex] = student;
-        saveStudentFeeDB(db);
-        currentActiveStudent = student;
-
-        closeModal('paymentModal');
-        btn.textContent = 'Confirm & Pay Securely';
-        btn.disabled = false;
-
-        showToast(`Payment of ₹${actualPayment.toLocaleString('en-IN')} successful for ${student.name}!`);
-
-        // Re-render Dues display
-        handleDuesSearch(new Event('submit'));
-
-        // If staff dashboard is visible, update it
-        if (sessionStorage.getItem('BIT_STAFF_AUTH') === 'true') {
-          renderStaffDashboard();
-        }
-
-        // Send Real-Time Sync Event to Google Sheets & Live Feed
-        sendPaymentToGoogleSheet(student, receiptObj);
-
-        // Show Official Receipt Modal immediately
-        displayReceiptModal(student, receiptObj);
-      }
-    }, 1000);
-  }
+  
 
   // Display Official Receipt
   function displayReceiptModal(student, receipt) {
@@ -3205,11 +3054,9 @@
         <td>${statusHtml}</td>
         <td>
           <div style="display: flex; gap: 6px;">
-            ${!isCleared ? `
-              <button class="btn-outline-sm" onclick="openPaymentGatewayModal('${s.roll}')" style="font-size: 0.75rem; padding: 4px 8px; background: white;">
-                Record Pay
-              </button>
-            ` : ''}
+            <a href="${getSheetSpreadsheetUrl()}" target="_blank" rel="noopener" class="btn-outline-sm" style="font-size: 0.75rem; padding: 4px 8px; background: #f0fdf4; color: #15803d; border-color: #86efac; text-decoration: none;">
+              Sheet ↗
+            </a>
             ${s.txnHistory && s.txnHistory.length > 0 ? `
               <button class="btn-outline-sm" onclick="showLatestReceipt('${s.roll}')" style="font-size: 0.75rem; padding: 4px 8px; background: white;" title="View Receipt">
                 Receipt
@@ -3770,15 +3617,15 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           +91-7327078543 / 9668464875
         </a>
-        <a href="/cdn-cgi/l/email-protection#aac8c3dec8cbd8cdcbc5c4989a989ceacdc7cbc3c684c9c5c7">
+        <a href="/cdn-cgi/l/email-protection#bbd9d2cfd9dac9dcdad4d5898b898dfbdcd6dad2d795d8d4d6">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span class="__cf_email__" data-cfemail="accec5d8cecddecbcdc3c29e9c9e9aeccbc1cdc5c082cfc3c1">[email&#160;protected]</span>
+          <span class="__cf_email__" data-cfemail="e98b809d8b889b8e888687dbd9dbdfa98e84888085c78a8684">[email&#160;protected]</span>
         </a>
       </div>
       <div class="top-bar-links">
         <a href="#notes" style="color: #6ee7b7; font-weight: 600;">📚 Study Notes</a>
         <span>|</span>
-        <a href="#fee-portal" style="color: #fcd34d; font-weight: 700;">💳 Student & Hostel Fee Portal</a>
+        <a href="#fee-portal" style="color: #fcd34d; font-weight: 700;">📊 Student & Hostel Fee Ledger</a>
         <span>|</span>
         <a href="https://skill.samsodisha.gov.in/Website/diploma/Diphome.aspx" target="_blank" rel="noopener">SAMS Odisha Portal</a>
         <span>|</span>
@@ -3853,7 +3700,7 @@
           <li class="nav-item"><a href="#facilities" class="nav-link">Campus Facilities</a></li>
           <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
           <li class="nav-item"><a href="#notes" class="nav-link">📚 Notes</a></li>
-          <li class="nav-item"><a href="#fee-portal" class="nav-link" style="color: var(--accent); font-weight: 700;">💳 Fee Portal & Dues</a></li>
+          <li class="nav-item"><a href="#fee-portal" class="nav-link" style="color: var(--accent); font-weight: 700;">📊 Fee & Dues Ledger</a></li>
           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
           <li class="nav-item">
             <button class="header-cta-btn" onclick="openAdmissionModal()">
@@ -4587,10 +4434,10 @@
   <section class="section-pad programs-bg" id="fee-portal">
     <div class="container">
       <div class="section-header">
-        <span class="section-subtitle">Online Accounts & Payments</span>
-        <h2 class="section-title">Student & Hostel Fee Portal</h2>
+        <span class="section-subtitle">Official Accounts & Ledger</span>
+        <h2 class="section-title">Student & Hostel Fee Ledger</h2>
         <p class="section-desc">
-          Check outstanding semester tuition dues, hostel and mess charges, make secure online payments via UPI / NetBanking, or access the Staff Accounts Ledger.
+          Check semester tuition fees, hostel and mess dues, or access the centralized College Accounts Google Sheets Ledger across all departments.
         </p>
       </div>
 
@@ -4598,7 +4445,7 @@
       <div class="fee-tab-controls">
         <button class="fee-tab-btn active" id="tabStudentBtn" onclick="switchFeeTab('student')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-          Student Fee & Dues Portal
+          Student Dues & Fee Status
         </button>
         <button class="fee-tab-btn" id="tabStaffBtn" onclick="switchFeeTab('staff')">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -4611,7 +4458,7 @@
         <div class="fee-search-card">
           <div class="fee-search-header">
             <h3>Check Student & Hostel Dues</h3>
-            <p>Enter your College Roll No or Registration No (e.g. <code>BIT202601</code>, <code>BIT202602</code>, or <code>BIT202605</code>) to view semester dues and pay online.</p>
+            <p>Enter your College Roll No or Registration No (e.g. <code>BIT202601</code>, <code>BIT202602</code>, or <code>BIT202605</code>) to view semester dues and fee ledger status.</p>
           </div>
           <form class="fee-search-form" onsubmit="handleDuesSearch(event)">
             <input type="text" id="studentRollSearch" placeholder="Enter Roll No (e.g. BIT202601, BIT202604...)" required autocomplete="off">
@@ -4793,106 +4640,6 @@
   <!-- ===================================================================
        MODAL: ONLINE PAYMENT GATEWAY DIALOG
        =================================================================== -->
-  <div class="modal-backdrop" id="paymentModal">
-    <div class="modal-box" style="max-width: 560px;">
-      <button class="modal-close" onclick="closeModal('paymentModal')">✕</button>
-      
-      <div style="text-align: center; margin-bottom: 20px;">
-        <span class="gov-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border-color: rgba(16, 185, 129, 0.3);">
-          🔒 BIT 256-Bit SSL Encrypted Payment Gateway
-        </span>
-        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-top: 10px;">Complete Fee Payment</h3>
-        <p style="font-size: 0.85rem; color: var(--text-muted);" id="paymentSubtitle">Paying fees for Student</p>
-      </div>
-
-      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem;">
-          <span style="color: var(--text-muted);">Student:</span>
-          <strong id="payStudentName" style="color: var(--primary);">-</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem;">
-          <span style="color: var(--text-muted);">Roll Number:</span>
-          <strong id="payStudentRoll">-</strong>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-top: 1px dashed var(--border-color); padding-top: 6px;">
-          <span style="color: var(--text-muted);">Outstanding Dues:</span>
-          <strong id="payStudentDues" style="color: #dc2626; font-size: 1.05rem;">₹0</strong>
-        </div>
-      </div>
-
-      <form id="paymentGatewayForm" onsubmit="handleProcessPayment(event)">
-        <div class="form-col" style="margin-bottom: 14px;">
-          <label style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">Enter Amount to Pay (₹) *</label>
-          <input type="number" id="payAmountInput" min="100" step="100" required style="font-size: 1.2rem; font-weight: 800; color: var(--primary); padding: 10px 14px; border: 2px solid var(--secondary); border-radius: 6px;">
-          <span style="font-size: 0.78rem; color: var(--text-muted); margin-top: 3px;">You can pay full dues or partial installment.</span>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <label style="font-weight: 700; color: var(--primary); font-size: 0.85rem; display: block; margin-bottom: 8px;">Select Payment Mode:</label>
-          <div class="pay-method-grid">
-            <label class="pay-method-option">
-              <input type="radio" name="payMethod" value="UPI" checked onchange="switchPayMethodUI('UPI')">
-              <div class="pm-content">
-                <strong>UPI / QR Code</strong>
-                <span>GPay, PhonePe, Paytm, BHIM</span>
-              </div>
-            </label>
-            <label class="pay-method-option">
-              <input type="radio" name="payMethod" value="NETBANKING" onchange="switchPayMethodUI('NETBANKING')">
-              <div class="pm-content">
-                <strong>Net Banking</strong>
-                <span>SBI, HDFC, ICICI, Axis</span>
-              </div>
-            </label>
-            <label class="pay-method-option">
-              <input type="radio" name="payMethod" value="CARD" onchange="switchPayMethodUI('CARD')">
-              <div class="pm-content">
-                <strong>Debit / Credit Card</strong>
-                <span>Visa, MasterCard, RuPay</span>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- PAYMENT DETAILS DYNAMIC VIEW -->
-        <div id="upiPayBox" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 18px;">
-          <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
-            <div style="background: white; padding: 8px; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid #cbd5e1;">
-              <!-- Embedded College UPI QR Visual -->
-              <svg width="100" height="100" viewBox="0 0 100 100">
-                <rect width="100" height="100" fill="white"/>
-                <rect x="10" y="10" width="30" height="30" fill="#102a54"/>
-                <rect x="16" y="16" width="18" height="18" fill="white"/>
-                <rect x="20" y="20" width="10" height="10" fill="#102a54"/>
-                <rect x="60" y="10" width="30" height="30" fill="#102a54"/>
-                <rect x="66" y="16" width="18" height="18" fill="white"/>
-                <rect x="70" y="20" width="10" height="10" fill="#102a54"/>
-                <rect x="10" y="60" width="30" height="30" fill="#102a54"/>
-                <rect x="16" y="66" width="18" height="18" fill="white"/>
-                <rect x="20" y="70" width="10" height="10" fill="#102a54"/>
-                <rect x="46" y="15" width="8" height="8" fill="#102a54"/>
-                <rect x="46" y="30" width="8" height="8" fill="#102a54"/>
-                <rect x="46" y="46" width="18" height="18" fill="#e67e22"/>
-                <rect x="70" y="46" width="14" height="8" fill="#102a54"/>
-                <rect x="70" y="66" width="14" height="20" fill="#102a54"/>
-                <rect x="46" y="72" width="18" height="14" fill="#102a54"/>
-              </svg>
-            </div>
-            <div style="text-align: left; font-size: 0.85rem; color: #166534;">
-              <strong style="display: block; font-size: 0.95rem; color: #15803d; margin-bottom: 2px;">Official UPI ID:</strong>
-              <code>bitbargaon.fee@sbi</code>
-              <p style="margin-top: 6px; font-size: 0.78rem; color: #4b5563;">Scan with any UPI App or click pay below to simulate instant online clearance.</p>
-            </div>
-          </div>
-        </div>
-
-        <button type="submit" id="btnConfirmPay" class="btn-primary" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 12px;">
-          Confirm & Pay Securely
-        </button>
-      </form>
-    </div>
-  </div>
-
   <!-- ===================================================================
        MODAL: OFFICIAL FEE RECEIPT VIEW (Printable & Downloadable)
        =================================================================== -->
@@ -5410,7 +5157,7 @@
             </div>
             <div class="contact-line">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="13717a6771726174727c7d2123212553747e727a7f3d707c7e">[email&#160;protected]</a></div>
+              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae8e3fee8ebf8edebe5e4b8bab8bccaede7ebe3e6a4e9e5e7">[email&#160;protected]</a></div>
             </div>
           </div>
 
@@ -5541,7 +5288,7 @@
         <ul class="footer-links">
           <li><a href="tel:+917327078543">Helpline: +91-7327078543</a></li>
           <li><a href="tel:+919668464875">Counselor: +91-9668464875</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#5f3d362b3d3e2d383e30316d6f6d691f38323e3633713c3032"><span class="__cf_email__" data-cfemail="34565d4056554653555b5a06040602745359555d581a575b59">[email&#160;protected]</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#8fede6fbedeefde8eee0e1bdbfbdb9cfe8e2eee6e3a1ece0e2"><span class="__cf_email__" data-cfemail="34565d4056554653555b5a06040602745359555d581a575b59">[email&#160;protected]</span></a></li>
           <li><a href="#contact">Grievance Redressal Cell</a></li>
           <li><a href="#contact">Anti-Ragging Committee</a></li>
           <li><a href="#contact">Women's Cell & Internal Committee</a></li>
@@ -5915,5 +5662,5 @@
       }
     });
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a477ac2d9f5c7e2c',t:'MTc5MTQ4OTAwNQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
