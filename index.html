@@ -1746,7 +1746,456 @@
         max-width: 100%;
       }
     }
-  </style>
+      /* ===================================================================
+       ONLINE FEE PORTAL & DUES SYSTEM STYLES
+       =================================================================== */
+    .fee-tab-controls {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .fee-tab-btn {
+      background: #ffffff;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .fee-tab-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .fee-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px rgba(16, 42, 84, 0.3);
+    }
+
+    .fee-search-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .fee-search-header {
+      margin-bottom: 22px;
+    }
+
+    .fee-search-header h3 {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .fee-search-header p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .fee-search-form {
+      display: flex;
+      gap: 12px;
+    }
+
+    .fee-search-form input {
+      flex: 1;
+      padding: 13px 18px;
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      font-size: 1.05rem;
+      font-weight: 600;
+      outline: none;
+      transition: var(--transition);
+      background: #f8fafc;
+    }
+
+    .fee-search-form input:focus {
+      border-color: var(--secondary);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+
+    .fee-demo-pills {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .fee-demo-pills button {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .fee-demo-pills button:hover {
+      background: var(--gold-light);
+      border-color: var(--gold);
+      color: var(--accent);
+    }
+
+    /* DUES RESULT CARD */
+    .dues-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-color);
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .dues-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .dues-breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 25px 0;
+    }
+
+    .db-box {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+    }
+
+    .db-box.highlight-green {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .db-lbl {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .db-val {
+      display: block;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .dues-actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    /* STAFF STATS & TABLE */
+    .staff-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .staff-stat-box {
+      background: #ffffff;
+      padding: 22px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--primary);
+      border-top: 1px solid var(--border-color);
+      border-right: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .staff-stat-box.green { border-left-color: #10b981; }
+    .staff-stat-box.red { border-left-color: #ef4444; }
+    .staff-stat-box.purple { border-left-color: #8b5cf6; }
+
+    .st-lbl {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .st-val {
+      display: block;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin: 4px 0 2px;
+    }
+
+    .st-sub {
+      display: block;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .staff-filter-bar {
+      background: #ffffff;
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .staff-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .staff-filter-group select {
+      padding: 6px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 0.85rem;
+      background: #f8fafc;
+      outline: none;
+    }
+
+    .staff-action-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .staff-table-wrap {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-color);
+      overflow-x: auto;
+    }
+
+    .staff-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .staff-table th {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .staff-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-main);
+    }
+
+    .staff-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .badge-status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 50px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .badge-status.cleared {
+      background: #dcfce7;
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .badge-status.pending {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    /* PAYMENT METHOD OPTIONS */
+    .pay-method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .pay-method-option {
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: var(--transition);
+    }
+
+    .pay-method-option:hover {
+      border-color: var(--secondary);
+    }
+
+    .pay-method-option input:checked + .pm-content {
+      color: var(--secondary);
+    }
+
+    .pm-content strong {
+      display: block;
+      font-size: 0.82rem;
+    }
+
+    .pm-content span {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* RECEIPT STYLING */
+    .receipt-box {
+      border: 2px solid var(--primary);
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: #ffffff;
+    }
+
+    .receipt-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .receipt-meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      font-size: 0.82rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .receipt-student-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      font-size: 0.84rem;
+      background: #f8fafc;
+      border-radius: 6px;
+      padding: 12px;
+      margin: 12px 0;
+    }
+
+    .receipt-student-info span {
+      color: var(--text-muted);
+    }
+
+    .receipt-ledger-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 16px 0;
+    }
+
+    .receipt-ledger-table th, .receipt-ledger-table td {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .receipt-ledger-table th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    .receipt-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .fee-search-form {
+        flex-direction: column;
+      }
+      .dues-breakdown-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .staff-stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .pay-method-grid {
+        grid-template-columns: 1fr;
+      }
+      .receipt-meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .receipt-student-info {
+        grid-template-columns: 1fr;
+      }
+    }
+
+</style>
 
   <script>
     // Universal image error resolver: ensures images load from root, subfolder, or cloud CDN
@@ -1793,6 +2242,712 @@
         });
       });
     });
+    /* ===================================================================
+     ONLINE FEE & DUES PORTAL LOGIC
+     =================================================================== */
+
+  // Initial Seed Data for BIT Students (College & Hostel)
+  const INITIAL_STUDENT_DATA = [
+    {
+      roll: "BIT202601",
+      name: "Rajesh Kumar Nayak",
+      branch: "Mining Engineering",
+      semester: "1st Semester",
+      phone: "+91-9861234567",
+      hostel: "Yes (Boys Hostel)",
+      room: "B-201",
+      tuitionFee: 38000,
+      hostelFee: 32000,
+      totalFee: 70000,
+      paid: 45000,
+      dues: 25000,
+      status: "Partial",
+      lastPaymentDate: "2026-09-15",
+      txnHistory: [
+        { receiptNo: "REC-2026-101", date: "2026-09-15", amount: 45000, mode: "Online UPI", txnId: "UPI784392019" }
+      ]
+    },
+    {
+      roll: "BIT202602",
+      name: "Priyanka Patel",
+      branch: "MBA",
+      semester: "1st Semester",
+      phone: "+91-9437189021",
+      hostel: "No (Day Scholar)",
+      room: "N/A",
+      tuitionFee: 55000,
+      hostelFee: 0,
+      totalFee: 55000,
+      paid: 55000,
+      dues: 0,
+      status: "Cleared",
+      lastPaymentDate: "2026-09-10",
+      txnHistory: [
+        { receiptNo: "REC-2026-088", date: "2026-09-10", amount: 55000, mode: "Net Banking", txnId: "HDFC90823412" }
+      ]
+    },
+    {
+      roll: "BIT202603",
+      name: "Subhashree Samal",
+      branch: "AIML",
+      semester: "1st Semester",
+      phone: "+91-7008123456",
+      hostel: "Yes (Girls Hostel)",
+      room: "G-105",
+      tuitionFee: 38000,
+      hostelFee: 30000,
+      totalFee: 68000,
+      paid: 30000,
+      dues: 38000,
+      status: "Partial",
+      lastPaymentDate: "2026-09-12",
+      txnHistory: [
+        { receiptNo: "REC-2026-095", date: "2026-09-12", amount: 30000, mode: "Online UPI", txnId: "UPI543219876" }
+      ]
+    },
+    {
+      roll: "BIT202604",
+      name: "Amitesh Dash",
+      branch: "Mechanical Engineering",
+      semester: "1st Semester",
+      phone: "+91-9938765432",
+      hostel: "No (Day Scholar)",
+      room: "N/A",
+      tuitionFee: 38000,
+      hostelFee: 0,
+      totalFee: 38000,
+      paid: 20000,
+      dues: 18000,
+      status: "Partial",
+      lastPaymentDate: "2026-09-18",
+      txnHistory: [
+        { receiptNo: "REC-2026-114", date: "2026-09-18", amount: 20000, mode: "Debit Card", txnId: "CARD88231902" }
+      ]
+    },
+    {
+      roll: "BIT202605",
+      name: "Bikash Behera",
+      branch: "Electrical Engineering",
+      semester: "1st Semester",
+      phone: "+91-9124567890",
+      hostel: "Yes (Boys Hostel)",
+      room: "B-112",
+      tuitionFee: 38000,
+      hostelFee: 32000,
+      totalFee: 70000,
+      paid: 35000,
+      dues: 35000,
+      status: "Partial",
+      lastPaymentDate: "2026-09-08",
+      txnHistory: [
+        { receiptNo: "REC-2026-077", date: "2026-09-08", amount: 35000, mode: "Online UPI", txnId: "UPI902341872" }
+      ]
+    },
+    {
+      roll: "BIT202606",
+      name: "Ananya Mohanty",
+      branch: "BBA",
+      semester: "1st Semester",
+      phone: "+91-9853210987",
+      hostel: "No (Day Scholar)",
+      room: "N/A",
+      tuitionFee: 42000,
+      hostelFee: 0,
+      totalFee: 42000,
+      paid: 42000,
+      dues: 0,
+      status: "Cleared",
+      lastPaymentDate: "2026-09-20",
+      txnHistory: [
+        { receiptNo: "REC-2026-120", date: "2026-09-20", amount: 42000, mode: "Net Banking", txnId: "SBI543187291" }
+      ]
+    },
+    {
+      roll: "BIT202607",
+      name: "Deepak Dungdung",
+      branch: "Civil Engineering",
+      semester: "1st Semester",
+      phone: "+91-7894561230",
+      hostel: "Yes (Boys Hostel)",
+      room: "B-302",
+      tuitionFee: 38000,
+      hostelFee: 30000,
+      totalFee: 68000,
+      paid: 15000,
+      dues: 53000,
+      status: "Partial",
+      lastPaymentDate: "2026-09-05",
+      txnHistory: [
+        { receiptNo: "REC-2026-061", date: "2026-09-05", amount: 15000, mode: "Cash / Challan", txnId: "CHL2026004" }
+      ]
+    }
+  ];
+
+  // Helper to load or initialize database
+  function getStudentFeeDB() {
+    try {
+      const stored = localStorage.getItem('BIT_STUDENT_FEE_DB');
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch (e) {
+      console.warn('localStorage error, using memory fallback');
+    }
+    // save seed data
+    saveStudentFeeDB(INITIAL_STUDENT_DATA);
+    return INITIAL_STUDENT_DATA;
+  }
+
+  function saveStudentFeeDB(data) {
+    try {
+      localStorage.setItem('BIT_STUDENT_FEE_DB', JSON.stringify(data));
+    } catch (e) {
+      console.warn('localStorage save failed');
+    }
+  }
+
+  let currentActiveStudent = null;
+
+  // Toggle between Student and Staff views
+  function switchFeeTab(mode) {
+    const tabStudentBtn = document.getElementById('tabStudentBtn');
+    const tabStaffBtn = document.getElementById('tabStaffBtn');
+    const studentFeeView = document.getElementById('studentFeeView');
+    const staffFeeView = document.getElementById('staffFeeView');
+
+    if (mode === 'student') {
+      tabStudentBtn.classList.add('active');
+      tabStaffBtn.classList.remove('active');
+      studentFeeView.style.display = 'block';
+      staffFeeView.style.display = 'none';
+    } else {
+      tabStudentBtn.classList.remove('active');
+      tabStaffBtn.classList.add('active');
+      studentFeeView.style.display = 'none';
+      staffFeeView.style.display = 'block';
+
+      // Check if staff is already authenticated
+      if (sessionStorage.getItem('BIT_STAFF_AUTH') === 'true') {
+        document.getElementById('staffLoginForm').style.display = 'none';
+        document.getElementById('staffDashboard').style.display = 'block';
+        renderStaffDashboard();
+      } else {
+        document.getElementById('staffLoginForm').style.display = 'block';
+        document.getElementById('staffDashboard').style.display = 'none';
+      }
+    }
+  }
+
+  // Quick fill roll number demo buttons
+  function quickFillRoll(roll) {
+    document.getElementById('studentRollSearch').value = roll;
+    handleDuesSearch(new Event('submit'));
+  }
+
+  // Search student dues
+  function handleDuesSearch(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const query = document.getElementById('studentRollSearch').value.trim().toUpperCase();
+    const db = getStudentFeeDB();
+    const student = db.find(s => s.roll.toUpperCase() === query || s.phone.includes(query));
+
+    const resultBox = document.getElementById('duesResultCard');
+
+    if (!student) {
+      resultBox.style.display = 'block';
+      resultBox.innerHTML = `
+        <div style="background: #fef2f2; border: 1px solid #fecaca; border-radius: var(--radius-md); padding: 24px; text-align: center; color: #991b1b;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" style="margin-bottom: 10px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px;">Student Record Not Found</h4>
+          <p style="font-size: 0.9rem; color: #7f1d1d;">No record matches Roll Number <strong>"${query}"</strong>. Please verify your registration number or contact the Accounts Office at +91-7327078543.</p>
+        </div>
+      `;
+      return;
+    }
+
+    currentActiveStudent = student;
+    resultBox.style.display = 'block';
+
+    const isCleared = student.dues === 0;
+    const statusBadge = isCleared 
+      ? `<span style="background: #dcfce7; color: #166534; font-weight: 700; font-size: 0.85rem; padding: 4px 12px; border-radius: 50px; border: 1px solid #bbf7d0;">✓ FEES CLEARED</span>`
+      : `<span style="background: #fee2e2; color: #991b1b; font-weight: 700; font-size: 0.85rem; padding: 4px 12px; border-radius: 50px; border: 1px solid #fecaca;">⚠ DUES PENDING: ₹${student.dues.toLocaleString('en-IN')}</span>`;
+
+    resultBox.innerHTML = `
+      <div class="dues-card">
+        <div class="dues-header">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+              <h3 style="font-size: 1.4rem; color: var(--primary); font-weight: 800;">${student.name}</h3>
+              ${statusBadge}
+            </div>
+            <div style="font-size: 0.88rem; color: var(--text-muted);">
+              <strong>Roll No:</strong> ${student.roll} | <strong>Branch:</strong> ${student.branch} | <strong>Semester:</strong> ${student.semester}
+            </div>
+            <div style="font-size: 0.84rem; color: var(--text-muted); margin-top: 3px;">
+              <strong>Hostel Accommodation:</strong> ${student.hostel} ${student.room !== 'N/A' ? `(Room: ${student.room})` : ''}
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.78rem; text-transform: uppercase; font-weight: 700; color: var(--text-light);">Current Net Dues</span>
+            <div style="font-size: 2rem; font-weight: 800; color: ${isCleared ? '#15803d' : '#dc2626'}; line-height: 1.1;">
+              ₹${student.dues.toLocaleString('en-IN')}
+            </div>
+          </div>
+        </div>
+
+        <div class="dues-breakdown-grid">
+          <div class="db-box">
+            <span class="db-lbl">Tuition & College Fee</span>
+            <span class="db-val">₹${student.tuitionFee.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="db-box">
+            <span class="db-lbl">Hostel & Mess Charges</span>
+            <span class="db-val">${student.hostelFee > 0 ? `₹${student.hostelFee.toLocaleString('en-IN')}` : 'Nil (Day Scholar)'}</span>
+          </div>
+          <div class="db-box">
+            <span class="db-lbl">Total Semester Fee</span>
+            <span class="db-val">₹${student.totalFee.toLocaleString('en-IN')}</span>
+          </div>
+          <div class="db-box highlight-green">
+            <span class="db-lbl">Total Fee Paid</span>
+            <span class="db-val" style="color: #15803d;">₹${student.paid.toLocaleString('en-IN')}</span>
+          </div>
+        </div>
+
+        <div class="dues-actions-bar">
+          <div>
+            ${student.txnHistory && student.txnHistory.length > 0 ? `
+              <button class="btn-outline-sm" onclick="showLatestReceipt('${student.roll}')" style="background: white;">
+                📄 View Last Receipt (${student.txnHistory[student.txnHistory.length - 1].receiptNo})
+              </button>
+            ` : ''}
+          </div>
+          <div>
+            ${!isCleared ? `
+              <button class="btn-primary" onclick="openPaymentGatewayModal('${student.roll}')" style="padding: 12px 28px; font-size: 1rem; border-radius: 50px;">
+                💳 Pay Outstanding Fees Online (₹${student.dues.toLocaleString('en-IN')})
+              </button>
+            ` : `
+              <button class="btn-primary" style="background: #10b981; cursor: default; border: none; padding: 12px 28px; border-radius: 50px;" disabled>
+                ✓ All Fees Cleared
+              </button>
+            `}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Open Payment Gateway Modal
+  function openPaymentGatewayModal(roll) {
+    const db = getStudentFeeDB();
+    const student = db.find(s => s.roll === roll);
+    if (!student) return;
+
+    currentActiveStudent = student;
+    document.getElementById('payStudentName').textContent = student.name;
+    document.getElementById('payStudentRoll').textContent = student.roll + ` (${student.branch})`;
+    document.getElementById('payStudentDues').textContent = '₹' + student.dues.toLocaleString('en-IN');
+    document.getElementById('paymentSubtitle').textContent = `Paying semester & hostel dues for ${student.name}`;
+    
+    const payAmtInput = document.getElementById('payAmountInput');
+    payAmtInput.value = student.dues;
+    payAmtInput.max = student.dues;
+
+    document.getElementById('paymentModal').classList.add('open');
+  }
+
+  function switchPayMethodUI(method) {
+    const upiBox = document.getElementById('upiPayBox');
+    if (method === 'UPI') {
+      upiBox.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+          <div style="background: white; padding: 8px; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid #cbd5e1;">
+            <svg width="90" height="90" viewBox="0 0 100 100">
+              <rect width="100" height="100" fill="white"/>
+              <rect x="10" y="10" width="30" height="30" fill="#102a54"/>
+              <rect x="16" y="16" width="18" height="18" fill="white"/>
+              <rect x="20" y="20" width="10" height="10" fill="#102a54"/>
+              <rect x="60" y="10" width="30" height="30" fill="#102a54"/>
+              <rect x="66" y="16" width="18" height="18" fill="white"/>
+              <rect x="70" y="20" width="10" height="10" fill="#102a54"/>
+              <rect x="10" y="60" width="30" height="30" fill="#102a54"/>
+              <rect x="16" y="66" width="18" height="18" fill="white"/>
+              <rect x="20" y="70" width="10" height="10" fill="#102a54"/>
+              <rect x="46" y="15" width="8" height="8" fill="#102a54"/>
+              <rect x="46" y="30" width="8" height="8" fill="#102a54"/>
+              <rect x="46" y="46" width="18" height="18" fill="#e67e22"/>
+              <rect x="70" y="46" width="14" height="8" fill="#102a54"/>
+              <rect x="70" y="66" width="14" height="20" fill="#102a54"/>
+              <rect x="46" y="72" width="18" height="14" fill="#102a54"/>
+            </svg>
+          </div>
+          <div style="text-align: left; font-size: 0.85rem; color: #166534;">
+            <strong style="display: block; font-size: 0.95rem; color: #15803d;">Official UPI ID:</strong>
+            <code>bitbargaon.fee@sbi</code>
+            <p style="margin-top: 5px; font-size: 0.78rem; color: #4b5563;">Scan with GPay, PhonePe, or Paytm to complete instant bank transfer.</p>
+          </div>
+        </div>
+      `;
+    } else if (method === 'NETBANKING') {
+      upiBox.innerHTML = `
+        <div style="text-align: left; font-size: 0.88rem; color: var(--text-main);">
+          <strong style="display: block; margin-bottom: 8px;">Select Bank for Net Banking:</strong>
+          <select style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            <option>State Bank of India (SBI)</option>
+            <option>HDFC Bank</option>
+            <option>ICICI Bank</option>
+            <option>Punjab National Bank</option>
+            <option>Axis Bank</option>
+            <option>Bank of Baroda</option>
+            <option>Canara Bank</option>
+          </select>
+          <div style="margin-top: 8px; font-size: 0.78rem; color: #64748b;">You will be securely routed to your bank's portal to authorize.</div>
+        </div>
+      `;
+    } else {
+      upiBox.innerHTML = `
+        <div style="text-align: left; font-size: 0.85rem; color: var(--text-main);">
+          <div style="margin-bottom: 8px;">
+            <label style="display: block; font-size: 0.78rem; font-weight: 600;">Card Number</label>
+            <input type="text" placeholder="XXXX XXXX XXXX XXXX" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 600;">Expiry</label>
+              <input type="text" placeholder="MM/YY" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+            <div>
+              <label style="display: block; font-size: 0.78rem; font-weight: 600;">CVV</label>
+              <input type="password" placeholder="•••" maxlength="3" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;">
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Handle Payment Process
+  function handleProcessPayment(e) {
+    e.preventDefault();
+    if (!currentActiveStudent) return;
+
+    const payAmount = parseInt(document.getElementById('payAmountInput').value, 10);
+    if (isNaN(payAmount) || payAmount <= 0) {
+      alert('Please enter a valid payment amount.');
+      return;
+    }
+
+    const payMethod = document.querySelector('input[name="payMethod"]:checked')?.value || 'Online UPI';
+
+    const btn = document.getElementById('btnConfirmPay');
+    btn.textContent = 'Processing Bank Verification...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      // Update database
+      const db = getStudentFeeDB();
+      const studentIndex = db.findIndex(s => s.roll === currentActiveStudent.roll);
+
+      if (studentIndex !== -1) {
+        const student = db[studentIndex];
+        const actualPayment = Math.min(payAmount, student.dues);
+        
+        student.paid += actualPayment;
+        student.dues = Math.max(0, student.totalFee - student.paid);
+        student.status = student.dues === 0 ? "Cleared" : "Partial";
+        student.lastPaymentDate = new Date().toISOString().split('T')[0];
+
+        const receiptId = 'REC-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900);
+        const txnId = payMethod.substring(0, 3).toUpperCase() + Math.floor(100000000 + Math.random() * 900000000);
+
+        const receiptObj = {
+          receiptNo: receiptId,
+          date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
+          amount: actualPayment,
+          mode: payMethod,
+          txnId: txnId,
+          balanceDues: student.dues
+        };
+
+        if (!student.txnHistory) student.txnHistory = [];
+        student.txnHistory.push(receiptObj);
+
+        db[studentIndex] = student;
+        saveStudentFeeDB(db);
+        currentActiveStudent = student;
+
+        closeModal('paymentModal');
+        btn.textContent = 'Confirm & Pay Securely';
+        btn.disabled = false;
+
+        showToast(`Payment of ₹${actualPayment.toLocaleString('en-IN')} successful for ${student.name}!`);
+
+        // Re-render Dues display
+        handleDuesSearch(new Event('submit'));
+
+        // If staff dashboard is visible, update it
+        if (sessionStorage.getItem('BIT_STAFF_AUTH') === 'true') {
+          renderStaffDashboard();
+        }
+
+        // Show Official Receipt Modal immediately
+        displayReceiptModal(student, receiptObj);
+      }
+    }, 1000);
+  }
+
+  // Display Official Receipt
+  function displayReceiptModal(student, receipt) {
+    document.getElementById('recNo').textContent = receipt.receiptNo;
+    document.getElementById('recDate').textContent = receipt.date;
+    document.getElementById('recTxn').textContent = receipt.txnId;
+    document.getElementById('recName').textContent = student.name;
+    document.getElementById('recRoll').textContent = student.roll;
+    document.getElementById('recBranch').textContent = student.branch;
+    document.getElementById('recSem').textContent = student.semester;
+    document.getElementById('recHostel').textContent = student.hostel + (student.room !== 'N/A' ? ` (Room: ${student.room})` : '');
+    document.getElementById('recMode').textContent = receipt.mode;
+
+    document.getElementById('recTuition').textContent = '₹' + student.tuitionFee.toLocaleString('en-IN');
+    document.getElementById('recTuitionPaid').textContent = '₹' + Math.min(receipt.amount, student.tuitionFee).toLocaleString('en-IN');
+
+    const hostelRow = document.getElementById('recHostelRow');
+    if (student.hostelFee > 0) {
+      hostelRow.style.display = 'table-row';
+      document.getElementById('recHostelFee').textContent = '₹' + student.hostelFee.toLocaleString('en-IN');
+      const hostelAllot = Math.max(0, receipt.amount - student.tuitionFee);
+      document.getElementById('recHostelPaid').textContent = '₹' + hostelAllot.toLocaleString('en-IN');
+    } else {
+      hostelRow.style.display = 'none';
+    }
+
+    document.getElementById('recTotalPaid').textContent = '₹' + receipt.amount.toLocaleString('en-IN');
+    document.getElementById('recBalanceDues').textContent = '₹' + receipt.balanceDues.toLocaleString('en-IN');
+
+    document.getElementById('receiptModal').classList.add('open');
+  }
+
+  function showLatestReceipt(roll) {
+    const db = getStudentFeeDB();
+    const student = db.find(s => s.roll === roll);
+    if (!student || !student.txnHistory || student.txnHistory.length === 0) {
+      alert('No previous payment receipts found for this student.');
+      return;
+    }
+    const latest = student.txnHistory[student.txnHistory.length - 1];
+    displayReceiptModal(student, latest);
+  }
+
+  function printReceipt() {
+    window.print();
+  }
+
+  /* ===================================================================
+     STAFF / ACCOUNTS PORTAL LOGIC
+     =================================================================== */
+  function handleStaffLogin(e) {
+    e.preventDefault();
+    const pin = document.getElementById('staffPinInput').value.trim();
+    if (pin === 'bit2026') {
+      sessionStorage.setItem('BIT_STAFF_AUTH', 'true');
+      document.getElementById('staffLoginForm').style.display = 'none';
+      document.getElementById('staffDashboard').style.display = 'block';
+      renderStaffDashboard();
+      showToast('Staff Access Granted. Welcome to BIT Accounts Portal.');
+    } else {
+      alert('Incorrect Staff PIN. (Default demo PIN is bit2026)');
+    }
+  }
+
+  function logoutStaff() {
+    sessionStorage.removeItem('BIT_STAFF_AUTH');
+    document.getElementById('staffLoginForm').style.display = 'block';
+    document.getElementById('staffDashboard').style.display = 'none';
+    document.getElementById('staffPinInput').value = '';
+    showToast('Logged out of Staff Portal.');
+  }
+
+  function renderStaffDashboard() {
+    const db = getStudentFeeDB();
+
+    let totalPayable = 0;
+    let totalCollected = 0;
+    let totalDues = 0;
+    let hostelStudents = 0;
+
+    db.forEach(s => {
+      totalPayable += s.totalFee;
+      totalCollected += s.paid;
+      totalDues += s.dues;
+      if (s.hostel.startsWith('Yes')) hostelStudents++;
+    });
+
+    document.getElementById('statTotalPayable').textContent = '₹' + totalPayable.toLocaleString('en-IN');
+    document.getElementById('statTotalCollected').textContent = '₹' + totalCollected.toLocaleString('en-IN');
+    document.getElementById('statTotalDues').textContent = '₹' + totalDues.toLocaleString('en-IN');
+    document.getElementById('statTotalStudents').textContent = db.length;
+    document.getElementById('statHostelCount').textContent = `${hostelStudents} in Hostels (${db.length - hostelStudents} Day Scholars)`;
+
+    renderStaffTable();
+  }
+
+  function renderStaffTable() {
+    const db = getStudentFeeDB();
+    const branchFilter = document.getElementById('staffBranchFilter').value;
+    const hostelFilter = document.getElementById('staffHostelFilter').value;
+    const duesFilter = document.getElementById('staffDuesStatusFilter').value;
+
+    const tbody = document.getElementById('staffTableBody');
+    tbody.innerHTML = '';
+
+    const filtered = db.filter(s => {
+      if (branchFilter !== 'ALL' && s.branch !== branchFilter) return false;
+      if (hostelFilter === 'HOSTEL_ONLY' && !s.hostel.startsWith('Yes')) return false;
+      if (hostelFilter === 'DAY_SCHOLAR' && s.hostel.startsWith('Yes')) return false;
+      if (duesFilter === 'PENDING' && s.dues === 0) return false;
+      if (duesFilter === 'CLEARED' && s.dues > 0) return false;
+      return true;
+    });
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 24px; color: var(--text-muted);">No student records match the selected filters.</td></tr>`;
+      return;
+    }
+
+    filtered.forEach(s => {
+      const isCleared = s.dues === 0;
+      const statusHtml = isCleared
+        ? `<span class="badge-status cleared">Cleared</span>`
+        : `<span class="badge-status pending">Dues ₹${s.dues.toLocaleString('en-IN')}</span>`;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><strong>${s.roll}</strong></td>
+        <td>
+          <div style="font-weight: 700; color: var(--primary);">${s.name}</div>
+          <div style="font-size: 0.75rem; color: var(--text-light);">${s.phone}</div>
+        </td>
+        <td>
+          <div>${s.branch}</div>
+          <div style="font-size: 0.75rem; color: var(--text-light);">${s.semester}</div>
+        </td>
+        <td>
+          ${s.hostel.startsWith('Yes') 
+            ? `<span style="background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">Hostel: ${s.room}</span>` 
+            : `<span style="color: #64748b; font-size: 0.75rem;">Day Scholar</span>`}
+        </td>
+        <td>₹${s.totalFee.toLocaleString('en-IN')}</td>
+        <td style="color: #15803d; font-weight: 700;">₹${s.paid.toLocaleString('en-IN')}</td>
+        <td style="color: ${isCleared ? '#15803d' : '#dc2626'}; font-weight: 800;">₹${s.dues.toLocaleString('en-IN')}</td>
+        <td>${statusHtml}</td>
+        <td>
+          <div style="display: flex; gap: 6px;">
+            ${!isCleared ? `
+              <button class="btn-outline-sm" onclick="openPaymentGatewayModal('${s.roll}')" style="font-size: 0.75rem; padding: 4px 8px; background: white;">
+                Record Pay
+              </button>
+            ` : ''}
+            ${s.txnHistory && s.txnHistory.length > 0 ? `
+              <button class="btn-outline-sm" onclick="showLatestReceipt('${s.roll}')" style="font-size: 0.75rem; padding: 4px 8px; background: white;" title="View Receipt">
+                Receipt
+              </button>
+            ` : ''}
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Export Staff Table to CSV
+  function exportFeesToCSV() {
+    const db = getStudentFeeDB();
+    let csv = 'Roll No,Student Name,Branch,Semester,Phone,Hostel Status,Room,Tuition Fee,Hostel Fee,Total Fee,Paid,Dues,Status,Last Payment Date\n';
+
+    db.forEach(s => {
+      csv += `"${s.roll}","${s.name}","${s.branch}","${s.semester}","${s.phone}","${s.hostel}","${s.room}",${s.tuitionFee},${s.hostelFee},${s.totalFee},${s.paid},${s.dues},"${s.status}","${s.lastPaymentDate || ''}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `BIT_Student_Fees_Report_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('Student Fee Report successfully downloaded as CSV!');
+  }
+
+  // Add new student modal controls
+  function openAddStudentModal() {
+    document.getElementById('addStudentModal').classList.add('open');
+  }
+
+  function toggleHostelFeeInput() {
+    const isHostel = document.getElementById('newHostel').value.startsWith('Yes');
+    document.getElementById('newHostelFeeRow').style.display = isHostel ? 'grid' : 'none';
+  }
+
+  function handleAddNewStudent(e) {
+    e.preventDefault();
+    const roll = document.getElementById('newRoll').value.trim().toUpperCase();
+    const name = document.getElementById('newName').value.trim();
+    const branch = document.getElementById('newBranch').value;
+    const semester = document.getElementById('newSem').value;
+    const tuition = parseInt(document.getElementById('newTuition').value, 10) || 0;
+    const hostelVal = document.getElementById('newHostel').value;
+    const isHostel = hostelVal.startsWith('Yes');
+    const hostelFee = isHostel ? (parseInt(document.getElementById('newHostelFee').value, 10) || 0) : 0;
+    const hostelRoom = isHostel ? (document.getElementById('newHostelRoom').value.trim() || 'Allotted') : 'N/A';
+    const initialPaid = parseInt(document.getElementById('newInitialPaid').value, 10) || 0;
+
+    const total = tuition + hostelFee;
+    const dues = Math.max(0, total - initialPaid);
+
+    const db = getStudentFeeDB();
+    if (db.some(s => s.roll === roll)) {
+      alert(`Student with Roll Number "${roll}" already exists in the system.`);
+      return;
+    }
+
+    const newRecord = {
+      roll: roll,
+      name: name,
+      branch: branch,
+      semester: semester,
+      phone: "+91-XXXXXXXXXX",
+      hostel: hostelVal,
+      room: hostelRoom,
+      tuitionFee: tuition,
+      hostelFee: hostelFee,
+      totalFee: total,
+      paid: initialPaid,
+      dues: dues,
+      status: dues === 0 ? "Cleared" : "Partial",
+      lastPaymentDate: new Date().toISOString().split('T')[0],
+      txnHistory: initialPaid > 0 ? [
+        {
+          receiptNo: 'REC-' + new Date().getFullYear() + '-' + Math.floor(100 + Math.random() * 900),
+          date: new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }),
+          amount: initialPaid,
+          mode: 'Accounts Enrollment',
+          txnId: 'INIT' + Math.floor(100000 + Math.random() * 900000),
+          balanceDues: dues
+        }
+      ] : []
+    };
+
+    db.unshift(newRecord);
+    saveStudentFeeDB(db);
+
+    closeModal('addStudentModal');
+    renderStaffDashboard();
+    showToast(`Student ${name} (${roll}) enrolled successfully!`);
+  }
+
   </script>
 
 </head>
@@ -1809,12 +2964,14 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           +91-7327078543 / 9668464875
         </a>
-        <a href="/cdn-cgi/l/email-protection#d8bab1acbab9aabfb9b7b6eae8eaee98bfb5b9b1b4f6bbb7b5">
+        <a href="/cdn-cgi/l/email-protection#2b49425f494a594c4a4445191b191d6b4c464a424705484446">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span class="__cf_email__" data-cfemail="34565d4056554653555b5a06040602745359555d581a575b59">[email&#160;protected]</span>
+          <span class="__cf_email__" data-cfemail="c0a2a9b4a2a1b2a7a1afaef2f0f2f680a7ada1a9aceea3afad">[email&#160;protected]</span>
         </a>
       </div>
       <div class="top-bar-links">
+        <a href="#fee-portal" style="color: #fcd34d; font-weight: 700;">💳 Student & Hostel Fee Portal</a>
+        <span>|</span>
         <a href="https://skill.samsodisha.gov.in/Website/diploma/Diphome.aspx" target="_blank" rel="noopener">SAMS Odisha Portal</a>
         <span>|</span>
         <a href="https://scholarship.odisha.gov.in/website/scholarship-details" target="_blank" rel="noopener">State Scholarship</a>
@@ -1887,6 +3044,7 @@
           <li class="nav-item"><a href="#admissions" class="nav-link">Admissions</a></li>
           <li class="nav-item"><a href="#facilities" class="nav-link">Campus Facilities</a></li>
           <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="#fee-portal" class="nav-link" style="color: var(--accent); font-weight: 700;">💳 Fee Portal & Dues</a></li>
           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
           <li class="nav-item">
             <button class="header-cta-btn" onclick="openAdmissionModal()">
@@ -2614,6 +3772,460 @@
   <!-- ===================================================================
        PHOTO GALLERY
        =================================================================== -->
+    <!-- ===================================================================
+       ONLINE FEE PAYMENT & DUES PORTAL (STUDENT & STAFF)
+       =================================================================== -->
+  <section class="section-pad programs-bg" id="fee-portal">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Online Accounts & Payments</span>
+        <h2 class="section-title">Student & Hostel Fee Portal</h2>
+        <p class="section-desc">
+          Check outstanding semester tuition dues, hostel and mess charges, make secure online payments via UPI / NetBanking, or access the Staff Accounts Ledger.
+        </p>
+      </div>
+
+      <!-- PORTAL MODE SELECTOR TABS -->
+      <div class="fee-tab-controls">
+        <button class="fee-tab-btn active" id="tabStudentBtn" onclick="switchFeeTab('student')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          Student Fee & Dues Portal
+        </button>
+        <button class="fee-tab-btn" id="tabStaffBtn" onclick="switchFeeTab('staff')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          College Staff / Accounts Dashboard
+        </button>
+      </div>
+
+      <!-- VIEW 1: STUDENT DUES SEARCH & PAYMENT -->
+      <div id="studentFeeView" class="fee-panel">
+        <div class="fee-search-card">
+          <div class="fee-search-header">
+            <h3>Check Student & Hostel Dues</h3>
+            <p>Enter your College Roll No or Registration No (e.g. <code>BIT202601</code>, <code>BIT202602</code>, or <code>BIT202605</code>) to view semester dues and pay online.</p>
+          </div>
+          <form class="fee-search-form" onsubmit="handleDuesSearch(event)">
+            <input type="text" id="studentRollSearch" placeholder="Enter Roll No (e.g. BIT202601, BIT202604...)" required autocomplete="off">
+            <button type="submit" class="btn-primary" style="border-radius: var(--radius-sm); padding: 12px 28px;">
+              <span>Search Dues</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+          </form>
+          <div class="fee-demo-pills">
+            <span>Try quick demo roll numbers:</span>
+            <button type="button" onclick="quickFillRoll('BIT202601')">BIT202601 (Mining + Hostel)</button>
+            <button type="button" onclick="quickFillRoll('BIT202602')">BIT202602 (MBA Day Scholar)</button>
+            <button type="button" onclick="quickFillRoll('BIT202603')">BIT202603 (AIML + Hostel)</button>
+            <button type="button" onclick="quickFillRoll('BIT202604')">BIT202604 (Mechanical)</button>
+            <button type="button" onclick="quickFillRoll('BIT202605')">BIT202605 (Electrical + Hostel)</button>
+          </div>
+        </div>
+
+        <!-- DUES RESULT DISPLAY (Populated dynamically) -->
+        <div id="duesResultCard" style="display: none; margin-top: 30px;">
+          <!-- Dynamically Injected -->
+        </div>
+      </div>
+
+      <!-- VIEW 2: STAFF / ACCOUNTS ADMIN VIEW -->
+      <div id="staffFeeView" class="fee-panel" style="display: none;">
+        <!-- STAFF LOGIN FORM (If not logged in) -->
+        <div id="staffLoginForm" class="fee-search-card" style="max-width: 500px; margin: 0 auto;">
+          <div class="fee-search-header" style="text-align: center;">
+            <div style="width: 50px; height: 50px; background: rgba(16, 42, 84, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            <h3>Accounts Staff Authentication</h3>
+            <p>Access the central fee registry, branch-wise dues, and hostel ledger.</p>
+          </div>
+          <form onsubmit="handleStaffLogin(event)" style="display: flex; flex-direction: column; gap: 14px;">
+            <div>
+              <label style="font-size: 0.85rem; font-weight: 600; color: var(--text-main); display: block; margin-bottom: 5px;">Staff Security PIN</label>
+              <input type="password" id="staffPinInput" placeholder="Default PIN: bit2026" required style="width: 100%; padding: 11px 14px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 1rem;">
+            </div>
+            <button type="submit" class="btn-primary" style="justify-content: center; border-radius: 6px;">Unlock Accounts Dashboard</button>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted);">
+              Demo Staff Access PIN: <code>bit2026</code>
+            </div>
+          </form>
+        </div>
+
+        <!-- STAFF ACCOUNTS DASHBOARD (After login) -->
+        <div id="staffDashboard" style="display: none;">
+          <!-- SUMMARY METRIC STATS -->
+          <div class="staff-stats-grid">
+            <div class="staff-stat-box">
+              <span class="st-lbl">Total Fees Payable</span>
+              <span class="st-val" id="statTotalPayable">₹0</span>
+              <span class="st-sub">College & Hostel Combined</span>
+            </div>
+            <div class="staff-stat-box green">
+              <span class="st-lbl">Total Fees Collected</span>
+              <span class="st-val" id="statTotalCollected">₹0</span>
+              <span class="st-sub">Verified Online / Cash</span>
+            </div>
+            <div class="staff-stat-box red">
+              <span class="st-lbl">Total Outstanding Dues</span>
+              <span class="st-val" id="statTotalDues">₹0</span>
+              <span class="st-sub">Pending Recovery</span>
+            </div>
+            <div class="staff-stat-box purple">
+              <span class="st-lbl">Enrolled Students</span>
+              <span class="st-val" id="statTotalStudents">0</span>
+              <span class="st-sub" id="statHostelCount">0 in Hostels</span>
+            </div>
+          </div>
+
+          <!-- CONTROLS & FILTERS -->
+          <div class="staff-filter-bar">
+            <div class="staff-filter-group">
+              <label>Filter by Branch:</label>
+              <select id="staffBranchFilter" onchange="renderStaffTable()">
+                <option value="ALL">All Branches</option>
+                <option value="Mining Engineering">Mining Engineering</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="AIML">Artificial Intelligence & ML</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="MBA">MBA (Management)</option>
+                <option value="BBA">BBA (Management)</option>
+              </select>
+            </div>
+
+            <div class="staff-filter-group">
+              <label>Filter by Hostel:</label>
+              <select id="staffHostelFilter" onchange="renderStaffTable()">
+                <option value="ALL">All Students</option>
+                <option value="HOSTEL_ONLY">Hostel Students Only</option>
+                <option value="DAY_SCHOLAR">Day Scholars Only</option>
+              </select>
+            </div>
+
+            <div class="staff-filter-group">
+              <label>Dues Status:</label>
+              <select id="staffDuesStatusFilter" onchange="renderStaffTable()">
+                <option value="ALL">All Statuses</option>
+                <option value="PENDING">Has Outstanding Dues (> ₹0)</option>
+                <option value="CLEARED">Fully Cleared (₹0 Dues)</option>
+              </select>
+            </div>
+
+            <div class="staff-action-btns">
+              <button class="btn-outline-sm" onclick="openAddStudentModal()" style="background: white;">+ Add Student Record</button>
+              <button class="btn-primary" onclick="exportFeesToCSV()" style="padding: 7px 18px; font-size: 0.85rem; border-radius: 50px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export CSV Report
+              </button>
+              <button class="btn-outline-sm" onclick="logoutStaff()" style="color: #ef4444; border-color: #fca5a5;">Logout</button>
+            </div>
+          </div>
+
+          <!-- ALL STUDENTS TABLE -->
+          <div class="staff-table-wrap">
+            <table class="staff-table">
+              <thead>
+                <tr>
+                  <th>Roll No</th>
+                  <th>Student Name</th>
+                  <th>Branch & Sem</th>
+                  <th>Hostel Status</th>
+                  <th>Total Fee</th>
+                  <th>Amount Paid</th>
+                  <th>Current Dues</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="staffTableBody">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       MODAL: ONLINE PAYMENT GATEWAY DIALOG
+       =================================================================== -->
+  <div class="modal-backdrop" id="paymentModal">
+    <div class="modal-box" style="max-width: 560px;">
+      <button class="modal-close" onclick="closeModal('paymentModal')">✕</button>
+      
+      <div style="text-align: center; margin-bottom: 20px;">
+        <span class="gov-badge" style="background: rgba(16, 185, 129, 0.15); color: #059669; border-color: rgba(16, 185, 129, 0.3);">
+          🔒 BIT 256-Bit SSL Encrypted Payment Gateway
+        </span>
+        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-top: 10px;">Complete Fee Payment</h3>
+        <p style="font-size: 0.85rem; color: var(--text-muted);" id="paymentSubtitle">Paying fees for Student</p>
+      </div>
+
+      <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 16px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem;">
+          <span style="color: var(--text-muted);">Student:</span>
+          <strong id="payStudentName" style="color: var(--primary);">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.9rem;">
+          <span style="color: var(--text-muted);">Roll Number:</span>
+          <strong id="payStudentRoll">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; border-top: 1px dashed var(--border-color); padding-top: 6px;">
+          <span style="color: var(--text-muted);">Outstanding Dues:</span>
+          <strong id="payStudentDues" style="color: #dc2626; font-size: 1.05rem;">₹0</strong>
+        </div>
+      </div>
+
+      <form id="paymentGatewayForm" onsubmit="handleProcessPayment(event)">
+        <div class="form-col" style="margin-bottom: 14px;">
+          <label style="font-weight: 700; color: var(--primary); font-size: 0.9rem;">Enter Amount to Pay (₹) *</label>
+          <input type="number" id="payAmountInput" min="100" step="100" required style="font-size: 1.2rem; font-weight: 800; color: var(--primary); padding: 10px 14px; border: 2px solid var(--secondary); border-radius: 6px;">
+          <span style="font-size: 0.78rem; color: var(--text-muted); margin-top: 3px;">You can pay full dues or partial installment.</span>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label style="font-weight: 700; color: var(--primary); font-size: 0.85rem; display: block; margin-bottom: 8px;">Select Payment Mode:</label>
+          <div class="pay-method-grid">
+            <label class="pay-method-option">
+              <input type="radio" name="payMethod" value="UPI" checked onchange="switchPayMethodUI('UPI')">
+              <div class="pm-content">
+                <strong>UPI / QR Code</strong>
+                <span>GPay, PhonePe, Paytm, BHIM</span>
+              </div>
+            </label>
+            <label class="pay-method-option">
+              <input type="radio" name="payMethod" value="NETBANKING" onchange="switchPayMethodUI('NETBANKING')">
+              <div class="pm-content">
+                <strong>Net Banking</strong>
+                <span>SBI, HDFC, ICICI, Axis</span>
+              </div>
+            </label>
+            <label class="pay-method-option">
+              <input type="radio" name="payMethod" value="CARD" onchange="switchPayMethodUI('CARD')">
+              <div class="pm-content">
+                <strong>Debit / Credit Card</strong>
+                <span>Visa, MasterCard, RuPay</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- PAYMENT DETAILS DYNAMIC VIEW -->
+        <div id="upiPayBox" style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 16px; text-align: center; margin-bottom: 18px;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 14px;">
+            <div style="background: white; padding: 8px; border-radius: 8px; box-shadow: var(--shadow-sm); border: 1px solid #cbd5e1;">
+              <!-- Embedded College UPI QR Visual -->
+              <svg width="100" height="100" viewBox="0 0 100 100">
+                <rect width="100" height="100" fill="white"/>
+                <rect x="10" y="10" width="30" height="30" fill="#102a54"/>
+                <rect x="16" y="16" width="18" height="18" fill="white"/>
+                <rect x="20" y="20" width="10" height="10" fill="#102a54"/>
+                <rect x="60" y="10" width="30" height="30" fill="#102a54"/>
+                <rect x="66" y="16" width="18" height="18" fill="white"/>
+                <rect x="70" y="20" width="10" height="10" fill="#102a54"/>
+                <rect x="10" y="60" width="30" height="30" fill="#102a54"/>
+                <rect x="16" y="66" width="18" height="18" fill="white"/>
+                <rect x="20" y="70" width="10" height="10" fill="#102a54"/>
+                <rect x="46" y="15" width="8" height="8" fill="#102a54"/>
+                <rect x="46" y="30" width="8" height="8" fill="#102a54"/>
+                <rect x="46" y="46" width="18" height="18" fill="#e67e22"/>
+                <rect x="70" y="46" width="14" height="8" fill="#102a54"/>
+                <rect x="70" y="66" width="14" height="20" fill="#102a54"/>
+                <rect x="46" y="72" width="18" height="14" fill="#102a54"/>
+              </svg>
+            </div>
+            <div style="text-align: left; font-size: 0.85rem; color: #166534;">
+              <strong style="display: block; font-size: 0.95rem; color: #15803d; margin-bottom: 2px;">Official UPI ID:</strong>
+              <code>bitbargaon.fee@sbi</code>
+              <p style="margin-top: 6px; font-size: 0.78rem; color: #4b5563;">Scan with any UPI App or click pay below to simulate instant online clearance.</p>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" id="btnConfirmPay" class="btn-primary" style="width: 100%; justify-content: center; font-size: 1.05rem; padding: 12px;">
+          Confirm & Pay Securely
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL: OFFICIAL FEE RECEIPT VIEW (Printable & Downloadable)
+       =================================================================== -->
+  <div class="modal-backdrop" id="receiptModal">
+    <div class="modal-box" style="max-width: 640px;">
+      <button class="modal-close" onclick="closeModal('receiptModal')">✕</button>
+      
+      <div id="receiptPrintArea" class="receipt-box">
+        <div class="receipt-header">
+          <img src="BITLogo.png" alt="BIT Logo" style="height: 52px; width: auto;" onerror="this.src='https://bitbargaon.org/logo/BITLogo.png'">
+          <div>
+            <h3 style="font-size: 1.2rem; color: var(--primary); font-weight: 800; line-height: 1.2;">BARGAON INSTITUTE OF TECHNOLOGY (BIT)</h3>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">At/Po: Bargaon, Sundargarh, Odisha | Affiliated to SCTE&VT & BPUT</p>
+            <div style="display: inline-block; background: #e2e8f0; font-weight: 700; font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; margin-top: 3px;">
+              E-FEES PAYMENT ACKNOWLEDGEMENT RECEIPT
+            </div>
+          </div>
+        </div>
+
+        <div class="receipt-meta-grid">
+          <div><strong>Receipt No:</strong> <span id="recNo">-</span></div>
+          <div><strong>Payment Date:</strong> <span id="recDate">-</span></div>
+          <div><strong>Transaction ID:</strong> <span id="recTxn">-</span></div>
+          <div><strong>Payment Status:</strong> <span style="color: #15803d; font-weight: 700;">SUCCESSFUL (VERIFIED)</span></div>
+        </div>
+
+        <div class="receipt-student-info">
+          <div><span>Student Name:</span> <strong id="recName">-</strong></div>
+          <div><span>Roll / Reg No:</span> <strong id="recRoll">-</strong></div>
+          <div><span>Branch / Stream:</span> <strong id="recBranch">-</strong></div>
+          <div><span>Semester:</span> <strong id="recSem">-</strong></div>
+          <div><span>Hostel Facility:</span> <strong id="recHostel">-</strong></div>
+          <div><span>Payment Mode:</span> <strong id="recMode">UPI Online</strong></div>
+        </div>
+
+        <table class="receipt-ledger-table">
+          <thead>
+            <tr>
+              <th>Fee Component</th>
+              <th style="text-align: right;">Amount Allocated</th>
+              <th style="text-align: right;">Paid Now</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>College Semester Tuition & Development Fee</td>
+              <td style="text-align: right;" id="recTuition">-</td>
+              <td style="text-align: right;" id="recTuitionPaid">-</td>
+            </tr>
+            <tr id="recHostelRow">
+              <td>Hostel Accommodation, Electricity & Mess Charges</td>
+              <td style="text-align: right;" id="recHostelFee">-</td>
+              <td style="text-align: right;" id="recHostelPaid">-</td>
+            </tr>
+            <tr style="background: #f8fafc; font-weight: 800; font-size: 0.95rem; border-top: 2px solid var(--border-color);">
+              <td>TOTAL AMOUNT PAID</td>
+              <td style="text-align: right;" colspan="2" id="recTotalPaid" style="color: #15803d;">₹0</td>
+            </tr>
+            <tr style="color: #dc2626; font-size: 0.85rem;">
+              <td>Remaining Outstanding Dues</td>
+              <td style="text-align: right;" colspan="2" id="recBalanceDues">₹0</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="receipt-footer">
+          <div style="font-size: 0.72rem; color: #64748b; max-width: 320px;">
+            This is a computer-generated official payment receipt. No physical signature required. Retain for end-semester admit card clearance.
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: monospace; font-size: 0.8rem; font-weight: 700; color: #1e3a8a; border: 1px solid #93c5fd; padding: 4px 8px; border-radius: 4px;">
+              [BIT ACCOUNTS SEAL]
+            </div>
+            <div style="font-size: 0.7rem; color: #475569; margin-top: 2px;">Authorized Signature</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 12px; margin-top: 20px;">
+        <button class="btn-primary" onclick="printReceipt()" style="flex: 1; justify-content: center;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print / Save PDF Receipt
+        </button>
+        <button class="btn-secondary" onclick="closeModal('receiptModal')" style="color: var(--text-main); border-color: var(--border-color);">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       MODAL: ADD NEW STUDENT (STAFF ACTION)
+       =================================================================== -->
+  <div class="modal-backdrop" id="addStudentModal">
+    <div class="modal-box" style="max-width: 580px;">
+      <button class="modal-close" onclick="closeModal('addStudentModal')">✕</button>
+      
+      <div style="margin-bottom: 20px;">
+        <span class="section-subtitle">Staff Accounts Registry</span>
+        <h3 style="font-size: 1.35rem; font-weight: 800; color: var(--primary);">Enroll New Student Fee Record</h3>
+      </div>
+
+      <form onsubmit="handleAddNewStudent(event)">
+        <div class="form-row">
+          <div class="form-col">
+            <label>Roll Number *</label>
+            <input type="text" id="newRoll" placeholder="e.g. BIT202610" required>
+          </div>
+          <div class="form-col">
+            <label>Student Full Name *</label>
+            <input type="text" id="newName" placeholder="Student Name" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label>Branch / Program *</label>
+            <select id="newBranch" required>
+              <option value="Mining Engineering">Diploma in Mining Engineering</option>
+              <option value="Mechanical Engineering">Diploma in Mechanical Engineering</option>
+              <option value="AIML">Diploma in AI & Machine Learning</option>
+              <option value="Electrical Engineering">Diploma in Electrical Engineering</option>
+              <option value="Civil Engineering">Diploma in Civil Engineering</option>
+              <option value="MBA">Master of Business Administration (MBA)</option>
+              <option value="BBA">Bachelor of Business Administration (BBA)</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>Semester</label>
+            <select id="newSem">
+              <option value="1st Semester">1st Semester (2026-27)</option>
+              <option value="2nd Semester">2nd Semester</option>
+              <option value="3rd Semester">3rd Semester</option>
+              <option value="4th Semester">4th Semester</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label>College Tuition Fee (₹) *</label>
+            <input type="number" id="newTuition" value="38000" required>
+          </div>
+          <div class="form-col">
+            <label>Hostel Facility?</label>
+            <select id="newHostel" onchange="toggleHostelFeeInput()">
+              <option value="No">No (Day Scholar)</option>
+              <option value="Yes (Boys Hostel)">Yes (Boys Hostel)</option>
+              <option value="Yes (Girls Hostel)">Yes (Girls Hostel)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row" id="newHostelFeeRow" style="display: none;">
+          <div class="form-col">
+            <label>Hostel & Mess Fee (₹)</label>
+            <input type="number" id="newHostelFee" value="32000">
+          </div>
+          <div class="form-col">
+            <label>Room Number</label>
+            <input type="text" id="newHostelRoom" placeholder="e.g. B-104">
+          </div>
+        </div>
+
+        <div class="form-col" style="margin-bottom: 20px;">
+          <label>Initial Amount Paid (₹)</label>
+          <input type="number" id="newInitialPaid" value="10000" placeholder="0 if unpaid">
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center;">
+          Enroll & Save to Ledger
+        </button>
+      </form>
+    </div>
+  </div>
+
+
   <section class="section-pad" id="gallery">
     <div class="container">
       <div class="section-header">
@@ -2713,7 +4325,7 @@
             </div>
             <div class="contact-line">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94f6fde0f6f5e6f3f5fbfaa6a4a6a2d4f3f9f5fdf8baf7fbf9">[email&#160;protected]</a></div>
+              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8cac1dccac9dacfc9c7c69a989a9ee8cfc5c9c1c486cbc7c5">[email&#160;protected]</a></div>
             </div>
           </div>
 
@@ -2844,7 +4456,7 @@
         <ul class="footer-links">
           <li><a href="tel:+917327078543">Helpline: +91-7327078543</a></li>
           <li><a href="tel:+919668464875">Counselor: +91-9668464875</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#c0a2a9b4a2a1b2a7a1afaef2f0f2f680a7ada1a9aceea3afad"><span class="__cf_email__" data-cfemail="76141f02141704111719184446444036111b171f1a5815191b">[email&#160;protected]</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#ee8c879a8c8f9c898f8180dcdedcd8ae89838f8782c08d8183"><span class="__cf_email__" data-cfemail="33515a4751524154525c5d0103010573545e525a5f1d505c5e">[email&#160;protected]</span></a></li>
           <li><a href="#contact">Grievance Redressal Cell</a></li>
           <li><a href="#contact">Anti-Ragging Committee</a></li>
           <li><a href="#contact">Women's Cell & Internal Committee</a></li>
@@ -3218,5 +4830,5 @@
       }
     });
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a476bf41fdeba8fc',t:'MTc5MTQ3OTMwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
