@@ -2195,6 +2195,185 @@
       }
     }
 
+    /* ===================================================================
+       STUDY NOTES PORTAL STYLES
+       =================================================================== */
+    .notes-top-bar {
+      background: #f8fafc;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 35px;
+    }
+
+    .notes-search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #ffffff;
+      padding: 10px 16px;
+      border-radius: 50px;
+      border: 1px solid var(--border-color);
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .notes-search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+      font-size: 0.92rem;
+      background: transparent;
+    }
+
+    .notes-filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .notes-filter-pills select {
+      padding: 9px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 50px;
+      font-size: 0.86rem;
+      background: #ffffff;
+      font-weight: 600;
+      color: var(--primary);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .note-card {
+      background: #ffffff;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .note-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+      border-color: #cbd5e1;
+    }
+
+    .note-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .note-branch-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: rgba(16, 42, 84, 0.08);
+      color: var(--primary);
+    }
+
+    .note-branch-badge.mining { background: #fef3c7; color: #92400e; }
+    .note-branch-badge.aiml { background: #e0e7ff; color: #3730a3; }
+    .note-branch-badge.mechanical { background: #fee2e2; color: #991b1b; }
+    .note-branch-badge.electrical { background: #dbeafe; color: #1e40af; }
+    .note-branch-badge.civil { background: #dcfce7; color: #166534; }
+    .note-branch-badge.mba { background: #f3e8ff; color: #6b21a8; }
+    .note-branch-badge.bba { background: #ffedd5; color: #9a3412; }
+
+    .note-sem-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
+    .note-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .note-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+      flex-grow: 1;
+    }
+
+    .note-meta {
+      border-top: 1px solid var(--border-color);
+      padding-top: 14px;
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .note-teacher {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .btn-download-note {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(16, 42, 84, 0.2);
+      transition: var(--transition);
+    }
+
+    .btn-download-note:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1024px) {
+      .notes-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .notes-top-bar { flex-direction: column; align-items: stretch; }
+      .notes-search-box { min-width: 100%; }
+      .notes-filter-pills { flex-direction: column; align-items: stretch; }
+      .notes-grid { grid-template-columns: 1fr; }
+    }
+
 </style>
 
   <script>
@@ -2948,6 +3127,306 @@
     showToast(`Student ${name} (${roll}) enrolled successfully!`);
   }
 
+    /* ===================================================================
+     STUDY NOTES & FACULTY UPLOAD LOGIC
+     =================================================================== */
+
+  const INITIAL_NOTES_DATA = [
+    {
+      id: "NOTE-MIN-101",
+      title: "Surface Mining & Drilling Safety Regulations",
+      branch: "Mining Engineering",
+      semester: "1st Semester",
+      teacher: "Dr. Arun Kumar Nayak & Er. S.K. Mohanty",
+      date: "2026-09-24",
+      desc: "Complete reference handbook covering opencast mining methods, DGMS statutory safety rules, blasting powder ratios, bench slopes, and ventilation.",
+      fileType: "PDF",
+      fileSize: "2.4 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF MINING ENGINEERING\nSUBJECT: SURFACE MINING & DRILLING SAFETY\n\nMODULE 1: INTRODUCTION TO OPEN-CAST MINING\n- Bench Height & Slope Stability: Angle of repose calculation for weathered rock.\n- Drilling Techniques: Rotary vs DTH (Down-the-Hole) drilling in iron ore formations.\n- DGMS Regulations 2026: Mandatory safety PPE, blast hazard zone demarcations.\n\nMODULE 2: BLASTING & EXPLOSIVE MECHANICS\n- ANFO (Ammonium Nitrate Fuel Oil) mixtures & booster placement.\n- Ground vibration minimization: Peak Particle Velocity (PPV) formulas.\n\nApproved by: Faculty of Mining Engineering, BIT Bargaon"
+    },
+    {
+      id: "NOTE-AIML-102",
+      title: "Python for Artificial Intelligence & Neural Networks",
+      branch: "AIML",
+      semester: "1st Semester",
+      teacher: "Er. P.K. Jena (HOD, AIML)",
+      date: "2026-09-28",
+      desc: "Comprehensive lab module covering Python data structures, NumPy, Pandas matrix manipulations, Matplotlib plotting, and Perceptron modeling.",
+      fileType: "PDF",
+      fileSize: "3.1 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF AI & MACHINE LEARNING (AIML)\nSUBJECT: PYTHON & NEURAL NETWORKS\n\nMODULE 1: DATA SCIENCE FOUNDATIONS\n- Vectorized operations using NumPy arrays.\n- DataFrame cleaning, missing value imputations using Pandas.\n- Supervised vs Unsupervised learning workflows.\n\nMODULE 2: ARTIFICIAL NEURAL NETWORKS\n- Forward propagation math: Z = W * X + b.\n- Activation functions: ReLU, Sigmoid, Softmax.\n- Gradient Descent optimization & Backpropagation derivations.\n\nPrepared by: Er. P.K. Jena, BIT Bargaon"
+    },
+    {
+      id: "NOTE-MECH-103",
+      title: "Applied Thermodynamics & IC Engines Formula Bank",
+      branch: "Mechanical Engineering",
+      semester: "1st Semester",
+      teacher: "Prof. M.R. Sahoo (Mechanical Faculty)",
+      date: "2026-09-19",
+      desc: "First and Second Laws of Thermodynamics, Carnot Cycle, Otto and Diesel cycle efficiency equations, enthalpy charts, and steam table reference.",
+      fileType: "PDF",
+      fileSize: "1.8 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF MECHANICAL ENGINEERING\nSUBJECT: APPLIED THERMODYNAMICS & IC ENGINES\n\n1. FIRST LAW EQUATIONS FOR OPEN/CLOSED SYSTEMS\n- Closed system: dQ = dU + dW\n- Steady Flow Energy Equation (SFEE): h1 + v1^2/2 + gz1 + q = h2 + v2^2/2 + gz2 + w\n\n2. CYCLE EFFICIENCIES\n- Otto Cycle: Efficiency = 1 - (1 / (r^(gamma - 1)))\n- Diesel Cycle: Cut-off ratio derivations and air-standard thermal performance.\n\nPrepared by: Mechanical Dept, BIT Bargaon"
+    },
+    {
+      id: "NOTE-ELEC-104",
+      title: "Electrical Machines & AC Circuits Master Guide",
+      branch: "Electrical Engineering",
+      semester: "1st Semester",
+      teacher: "Er. B.N. Das (Electrical Faculty)",
+      date: "2026-09-22",
+      desc: "Single-phase & 3-phase transformers, equivalent circuit diagrams, open-circuit/short-circuit test formulas, and DC motor speed control methods.",
+      fileType: "PDF",
+      fileSize: "2.8 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF ELECTRICAL ENGINEERING\nSUBJECT: ELECTRICAL MACHINES & AC CIRCUITS\n\n1. TRANSFORMERS\n- EMF equation: E = 4.44 * f * N * Phi_max\n- Core losses: Hysteresis (Steinmetz formula) and Eddy current losses.\n\n2. INDUCTION MOTORS & SYNCHRONOUS SPEED\n- Synchronous Speed: Ns = 120 * f / P\n- Slip calculation: s = (Ns - Nr) / Ns\n\nPrepared by: Er. B.N. Das, BIT Bargaon"
+    },
+    {
+      id: "NOTE-CIVIL-105",
+      title: "Surveying with Total Station & Civil CAD Practice",
+      branch: "Civil Engineering",
+      semester: "1st Semester",
+      teacher: "Prof. T.K. Pradhan (Civil Faculty)",
+      date: "2026-09-20",
+      desc: "Digital theodolite and Total Station setup guide, traverse correction (Bowditch method), leveling computations, and AutoCAD drafting shortcuts.",
+      fileType: "PDF",
+      fileSize: "2.2 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF CIVIL ENGINEERING\nSUBJECT: ADVANCED SURVEYING & CAD\n\n1. TOTAL STATION FIELD SETUP\n- Temporary adjustments: Centering with laser plummet and leveling using electronic plate level.\n- EDM (Electronic Distance Measurement) principles via infrared phase shifts.\n\n2. BUILDING DRAWING & CAD ESSENTIALS\n- Layer management, scale ratios (1:100), foundation cross-sections, and load-bearing wall estimations.\n\nPrepared by: Civil Engineering Department, BIT Bargaon"
+    },
+    {
+      id: "NOTE-MBA-106",
+      title: "Strategic Marketing & Corporate Case Studies",
+      branch: "MBA",
+      semester: "1st Semester",
+      teacher: "Dr. Bhimasen Swain (Principal, MBA)",
+      date: "2026-09-16",
+      desc: "Porter's 5 Forces Model, SWOT Framework, STP (Segmentation, Targeting, Positioning), product lifecycle dynamics, and Indian corporate case studies.",
+      fileType: "PDF",
+      fileSize: "3.5 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF MANAGEMENT STUDIES (MBA - BPUT AFFILIATED)\nSUBJECT: STRATEGIC MARKETING MANAGEMENT\n\nMODULE 1: MARKET ANALYSIS FRAMEWORKS\n- Porter's Five Competitive Forces: Supplier power, Buyer power, Threat of substitution, Threat of new entry, Competitive rivalry.\n- Ansoff Growth Matrix: Market Penetration, Market Development, Product Development, Diversification.\n\nPrepared under the direction of Dr. Bhimasen Swain, Principal (MBA), BIT"
+    },
+    {
+      id: "NOTE-BBA-107",
+      title: "Principles of Management & Financial Accounting",
+      branch: "BBA",
+      semester: "1st Semester",
+      teacher: "Prof. S. Senapati (Management Faculty)",
+      date: "2026-09-18",
+      desc: "Fayol's 14 Principles of Management, double-entry bookkeeping rules, preparation of Journal, Ledger, Trial Balance, and Profit & Loss accounts.",
+      fileType: "PDF",
+      fileSize: "1.9 MB",
+      content: "BARGAON INSTITUTE OF TECHNOLOGY (BIT)\nDEPARTMENT OF BUSINESS ADMINISTRATION (BBA)\nSUBJECT: PRINCIPLES OF MANAGEMENT & FINANCIAL ACCOUNTING\n\n1. MANAGEMENT THEORY\n- Henri Fayol's 14 Principles: Division of work, Authority & Responsibility, Discipline, Unity of command...\n- Planning, Organizing, Staffing, Directing, and Controlling (POSDCORB).\n\n2. ACCOUNTING FUNDAMENTALS\n- Golden rules of accounting for Personal, Real, and Nominal accounts.\n\nApproved by: BBA Faculty, BIT Bargaon"
+    }
+  ];
+
+  function getNotesDB() {
+    try {
+      const stored = localStorage.getItem('BIT_STUDY_NOTES_DB');
+      if (stored) return JSON.parse(stored);
+    } catch (e) {
+      console.warn('localStorage error, using defaults');
+    }
+    saveNotesDB(INITIAL_NOTES_DATA);
+    return INITIAL_NOTES_DATA;
+  }
+
+  function saveNotesDB(data) {
+    try {
+      localStorage.setItem('BIT_STUDY_NOTES_DB', JSON.stringify(data));
+    } catch (e) {
+      console.warn('localStorage save failed');
+    }
+  }
+
+  let teacherUploadedFileContent = null;
+  let teacherUploadedFileName = null;
+
+  function handleNoteFilePick(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    teacherUploadedFileName = file.name;
+    const reader = new FileReader();
+
+    if (file.type.startsWith('text/') || file.name.endsWith('.txt')) {
+      reader.onload = function(evt) {
+        teacherUploadedFileContent = evt.target.result;
+      };
+      reader.readAsText(file);
+    } else {
+      reader.onload = function(evt) {
+        teacherUploadedFileContent = evt.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    document.getElementById('fileUploadNotice').textContent = `File selected: "${file.name}" (${(file.size / 1024).toFixed(1)} KB)`;
+  }
+
+  function renderNotesList(data) {
+    const container = document.getElementById('notesListContainer');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      container.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px; background: #f8fafc; border-radius: var(--radius-lg); border: 1px dashed var(--border-color); color: var(--text-muted);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5" style="margin-bottom: 12px;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--primary);">No Study Notes Found</h4>
+          <p style="font-size: 0.9rem; margin-top: 4px;">Try adjusting your branch/semester filter or search keyword.</p>
+        </div>
+      `;
+      return;
+    }
+
+    const branchClassMap = {
+      'Mining Engineering': 'mining',
+      'AIML': 'aiml',
+      'Mechanical Engineering': 'mechanical',
+      'Electrical Engineering': 'electrical',
+      'Civil Engineering': 'civil',
+      'MBA': 'mba',
+      'BBA': 'bba'
+    };
+
+    data.forEach(note => {
+      const bClass = branchClassMap[note.branch] || '';
+      const card = document.createElement('div');
+      card.className = 'note-card';
+      card.innerHTML = `
+        <div class="note-card-top">
+          <span class="note-branch-badge ${bClass}">${note.branch}</span>
+          <span class="note-sem-tag">${note.semester}</span>
+        </div>
+        <h4 class="note-title">${note.title}</h4>
+        <p class="note-desc">${note.desc}</p>
+        <div class="note-meta">
+          <div class="note-teacher">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>${note.teacher}</span>
+          </div>
+          <button class="btn-download-note" onclick="downloadNoteFile('${note.id}')" title="Download Note">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            <span>Download</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function filterNotesList() {
+    const query = document.getElementById('notesSearchInput').value.toLowerCase().trim();
+    const branchFilter = document.getElementById('notesBranchFilter').value;
+    const semFilter = document.getElementById('notesSemFilter').value;
+
+    const db = getNotesDB();
+    const filtered = db.filter(note => {
+      const matchBranch = (branchFilter === 'ALL' || note.branch === branchFilter);
+      const matchSem = (semFilter === 'ALL' || note.semester === semFilter);
+      const matchQuery = !query || 
+        note.title.toLowerCase().includes(query) || 
+        note.teacher.toLowerCase().includes(query) || 
+        note.desc.toLowerCase().includes(query);
+
+      return matchBranch && matchSem && matchQuery;
+    });
+
+    renderNotesList(filtered);
+  }
+
+  function openUploadNoteModal() {
+    document.getElementById('uploadNoteModal').classList.add('open');
+  }
+
+  function handleTeacherNoteUpload(e) {
+    e.preventDefault();
+    const title = document.getElementById('noteTitle').value.trim();
+    const teacher = document.getElementById('noteTeacher').value.trim();
+    const branch = document.getElementById('noteBranch').value;
+    const semester = document.getElementById('noteSem').value;
+    const desc = document.getElementById('noteDesc').value.trim();
+
+    const noteId = 'NOTE-' + branch.substring(0, 3).toUpperCase() + '-' + Math.floor(100 + Math.random() * 900);
+
+    let defaultContent = `BARGAON INSTITUTE OF TECHNOLOGY (BIT), BARGAON, SUNDARGARH\n` +
+      `DEPARTMENT: ${branch.toUpperCase()}\n` +
+      `SEMESTER: ${semester}\n` +
+      `SUBJECT: ${title}\n` +
+      `FACULTY INSTRUCTOR: ${teacher}\n` +
+      `UPLOAD DATE: ${new Date().toLocaleDateString('en-IN')}\n\n` +
+      `SYLLABUS MODULE SUMMARY:\n${desc}\n\n` +
+      `KEY LECTURE HIGHLIGHTS & EXAMINATION POINTERS:\n` +
+      `1. Thoroughly review fundamental derivations and statutory safety standards.\n` +
+      `2. Work through the end-of-chapter practical numerical exercises.\n` +
+      `3. For queries, consult ${teacher} during departmental office hours.\n\n` +
+      `BIT Central Academic Repository - Approved for Student Circulation.`;
+
+    const newNote = {
+      id: noteId,
+      title: title,
+      branch: branch,
+      semester: semester,
+      teacher: teacher,
+      date: new Date().toISOString().split('T')[0],
+      desc: desc,
+      fileType: teacherUploadedFileName ? teacherUploadedFileName.split('.').pop().toUpperCase() : "PDF",
+      fileSize: "1.5 MB",
+      content: defaultContent,
+      attachedDataUrl: teacherUploadedFileContent
+    };
+
+    const db = getNotesDB();
+    db.unshift(newNote);
+    saveNotesDB(db);
+
+    // Reset form
+    document.getElementById('teacherUploadForm').reset();
+    teacherUploadedFileContent = null;
+    teacherUploadedFileName = null;
+    document.getElementById('fileUploadNotice').textContent = "Optional file attachment. If no file is attached, an official formatted BIT lecture module note will be generated automatically for student downloads.";
+
+    closeModal('uploadNoteModal');
+    filterNotesList();
+    showToast(`Note "${title}" uploaded successfully by ${teacher}!`);
+  }
+
+  function downloadNoteFile(noteId) {
+    const db = getNotesDB();
+    const note = db.find(n => n.id === noteId);
+    if (!note) {
+      alert('Note record not found.');
+      return;
+    }
+
+    if (note.attachedDataUrl) {
+      const link = document.createElement('a');
+      link.href = note.attachedDataUrl;
+      link.download = `BIT_${note.branch.replace(/\s+/g, '_')}_${note.title.replace(/\s+/g, '_')}.${note.fileType.toLowerCase()}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast(`Downloading "${note.title}"...`);
+      return;
+    }
+
+    // Generate formatted document blob
+    const blob = new Blob([note.content || note.desc], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `BIT_${note.branch.replace(/\s+/g, '_')}_${note.title.replace(/\s+/g, '_')}_Notes.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    showToast(`Downloading "${note.title}" notes...`);
+  }
+
+  // Initialize on load
+  document.addEventListener('DOMContentLoaded', () => {
+    filterNotesList();
+  });
+
   </script>
 
 </head>
@@ -2964,12 +3443,14 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           +91-7327078543 / 9668464875
         </a>
-        <a href="/cdn-cgi/l/email-protection#2b49425f494a594c4a4445191b191d6b4c464a424705484446">
+        <a href="/cdn-cgi/l/email-protection#e4868d9086859683858b8ad6d4d6d2a48389858d88ca878b89">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span class="__cf_email__" data-cfemail="c0a2a9b4a2a1b2a7a1afaef2f0f2f680a7ada1a9aceea3afad">[email&#160;protected]</span>
+          <span class="__cf_email__" data-cfemail="73111a0711120114121c1d4143414533141e121a1f5d101c1e">[email&#160;protected]</span>
         </a>
       </div>
       <div class="top-bar-links">
+        <a href="#notes" style="color: #6ee7b7; font-weight: 600;">📚 Study Notes</a>
+        <span>|</span>
         <a href="#fee-portal" style="color: #fcd34d; font-weight: 700;">💳 Student & Hostel Fee Portal</a>
         <span>|</span>
         <a href="https://skill.samsodisha.gov.in/Website/diploma/Diphome.aspx" target="_blank" rel="noopener">SAMS Odisha Portal</a>
@@ -3044,6 +3525,7 @@
           <li class="nav-item"><a href="#admissions" class="nav-link">Admissions</a></li>
           <li class="nav-item"><a href="#facilities" class="nav-link">Campus Facilities</a></li>
           <li class="nav-item"><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="#notes" class="nav-link">📚 Notes</a></li>
           <li class="nav-item"><a href="#fee-portal" class="nav-link" style="color: var(--accent); font-weight: 700;">💳 Fee Portal & Dues</a></li>
           <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
           <li class="nav-item">
@@ -4226,6 +4708,134 @@
   </div>
 
 
+    <!-- ===================================================================
+       STUDY NOTES & FACULTY UPLOAD PORTAL
+       =================================================================== -->
+  <section class="section-pad" id="notes" style="background-color: #ffffff;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-subtitle">Digital Academic Repository</span>
+        <h2 class="section-title">Department Study Notes & E-Resources</h2>
+        <p class="section-desc">
+          Access verified lecture notes, laboratory manuals, and revision question banks uploaded by BIT faculty members, or upload new course materials.
+        </p>
+      </div>
+
+      <!-- NOTES ACTION CONTROLS & STATS -->
+      <div class="notes-top-bar">
+        <div class="notes-search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="notesSearchInput" onkeyup="filterNotesList()" placeholder="Search notes by subject, topic, or teacher name...">
+        </div>
+
+        <div class="notes-filter-pills">
+          <select id="notesBranchFilter" onchange="filterNotesList()">
+            <option value="ALL">All Branches</option>
+            <option value="Mining Engineering">Mining Engineering</option>
+            <option value="Mechanical Engineering">Mechanical Engineering</option>
+            <option value="AIML">AI & Machine Learning (AIML)</option>
+            <option value="Electrical Engineering">Electrical Engineering</option>
+            <option value="Civil Engineering">Civil Engineering</option>
+            <option value="MBA">MBA Management</option>
+            <option value="BBA">BBA Management</option>
+          </select>
+
+          <select id="notesSemFilter" onchange="filterNotesList()">
+            <option value="ALL">All Semesters</option>
+            <option value="1st Semester">1st Semester</option>
+            <option value="2nd Semester">2nd Semester</option>
+            <option value="3rd Semester">3rd Semester</option>
+            <option value="4th Semester">4th Semester</option>
+            <option value="5th Semester">5th Semester</option>
+            <option value="6th Semester">6th Semester</option>
+          </select>
+
+          <button class="btn-primary" onclick="openUploadNoteModal()" style="border-radius: 50px; padding: 10px 22px; font-size: 0.88rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            <span>+ Faculty Upload Notes</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- NOTES LIST GRID -->
+      <div class="notes-grid" id="notesListContainer">
+        <!-- Dynamically injected via JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       MODAL: TEACHER UPLOAD NOTES DIALOG
+       =================================================================== -->
+  <div class="modal-backdrop" id="uploadNoteModal">
+    <div class="modal-box" style="max-width: 600px;">
+      <button class="modal-close" onclick="closeModal('uploadNoteModal')">✕</button>
+      
+      <div style="margin-bottom: 20px;">
+        <span class="section-subtitle">Faculty Repository</span>
+        <h3 style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-top: 5px;">Upload Study Notes / Assignment</h3>
+        <p style="font-size: 0.86rem; color: var(--text-muted);">Share lecture notes, question banks, or PDF modules for your students.</p>
+      </div>
+
+      <form id="teacherUploadForm" onsubmit="handleTeacherNoteUpload(event)">
+        <div class="form-row">
+          <div class="form-col">
+            <label>Subject / Module Title *</label>
+            <input type="text" id="noteTitle" placeholder="e.g. Surface Mining & Blasting Safety" required>
+          </div>
+          <div class="form-col">
+            <label>Teacher / Faculty Name *</label>
+            <input type="text" id="noteTeacher" placeholder="e.g. Er. Subrat Kumar Biswal" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-col">
+            <label>Branch / Department *</label>
+            <select id="noteBranch" required>
+              <option value="Mining Engineering">Diploma in Mining Engineering</option>
+              <option value="Mechanical Engineering">Diploma in Mechanical Engineering</option>
+              <option value="AIML">Diploma in AI & Machine Learning</option>
+              <option value="Electrical Engineering">Diploma in Electrical Engineering</option>
+              <option value="Civil Engineering">Diploma in Civil Engineering</option>
+              <option value="MBA">Master of Business Administration (MBA)</option>
+              <option value="BBA">Bachelor of Business Administration (BBA)</option>
+            </select>
+          </div>
+          <div class="form-col">
+            <label>Semester *</label>
+            <select id="noteSem" required>
+              <option value="1st Semester">1st Semester</option>
+              <option value="2nd Semester">2nd Semester</option>
+              <option value="3rd Semester">3rd Semester</option>
+              <option value="4th Semester">4th Semester</option>
+              <option value="5th Semester">5th Semester</option>
+              <option value="6th Semester">6th Semester</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-col" style="margin-bottom: 14px;">
+          <label>Topic Description / Module Summary *</label>
+          <textarea id="noteDesc" rows="3" placeholder="Brief outline of syllabus topics covered in this lecture note..." required></textarea>
+        </div>
+
+        <div class="form-col" style="margin-bottom: 20px;">
+          <label>Attach Note File (PDF, DOCX, TXT, or PPT) *</label>
+          <input type="file" id="noteFileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" onchange="handleNoteFilePick(event)" style="padding: 8px; background: white; border: 1px dashed var(--secondary);">
+          <div id="fileUploadNotice" style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">
+            Optional file attachment. If no file is attached, an official formatted BIT lecture module note will be generated automatically for student downloads.
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; font-size: 1rem; padding: 12px;">
+          🚀 Publish Note to Student Portal
+        </button>
+      </form>
+    </div>
+  </div>
+
+
   <section class="section-pad" id="gallery">
     <div class="container">
       <div class="section-header">
@@ -4325,7 +4935,7 @@
             </div>
             <div class="contact-line">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a8cac1dccac9dacfc9c7c69a989a9ee8cfc5c9c1c486cbc7c5">[email&#160;protected]</a></div>
+              <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d2d9c4d2d1c2d7d1dfde82808286f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</a></div>
             </div>
           </div>
 
@@ -4456,7 +5066,7 @@
         <ul class="footer-links">
           <li><a href="tel:+917327078543">Helpline: +91-7327078543</a></li>
           <li><a href="tel:+919668464875">Counselor: +91-9668464875</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#ee8c879a8c8f9c898f8180dcdedcd8ae89838f8782c08d8183"><span class="__cf_email__" data-cfemail="33515a4751524154525c5d0103010573545e525a5f1d505c5e">[email&#160;protected]</span></a></li>
+          <li><a href="/cdn-cgi/l/email-protection#64060d1006051603050b0a56545652240309050d084a070b09"><span class="__cf_email__" data-cfemail="c8aaa1bcaaa9baafa9a7a6faf8fafe88afa5a9a1a4e6aba7a5">[email&#160;protected]</span></a></li>
           <li><a href="#contact">Grievance Redressal Cell</a></li>
           <li><a href="#contact">Anti-Ragging Committee</a></li>
           <li><a href="#contact">Women's Cell & Internal Committee</a></li>
@@ -4830,5 +5440,5 @@
       }
     });
   </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a476bf41fdeba8fc',t:'MTc5MTQ3OTMwMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a476df621d3028cd',t:'MTc5MTQ4MDYxNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
