@@ -1883,43 +1883,104 @@
       }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
       .top-bar {
         display: none;
       }
       .mobile-toggle {
-        display: block;
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        background: #f1f5f9;
+        border: 1px solid var(--border-color);
+        border-radius: var(--radius-sm);
+        cursor: pointer;
+        color: var(--primary);
+        z-index: 1001;
+      }
+      .mobile-toggle svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--primary);
+        stroke-width: 2.5;
+        transition: transform 0.25s ease;
+      }
+      .mobile-toggle.active svg {
+        transform: rotate(90deg);
       }
       .nav-menu {
         position: fixed;
-        top: 80px;
+        top: 72px;
         left: 0;
         right: 0;
         bottom: 0;
-        background: white;
+        background: #ffffff;
         flex-direction: column;
-        align-items: flex-start;
-        padding: 24px;
+        align-items: stretch;
+        padding: 20px 24px 60px;
         overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        box-shadow: var(--shadow-xl);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
       }
       .nav-menu.open {
-        transform: translateX(0);
+        transform: translateX(0) !important;
+      }
+      .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+        padding: 4px 0;
+      }
+      .nav-item:last-child {
+        border-bottom: none;
+        margin-top: 10px;
+      }
+      .nav-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 8px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--primary);
+        width: 100%;
       }
       .nav-dropdown {
         position: static;
         box-shadow: none;
-        border: none;
-        padding-left: 14px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        border-radius: var(--radius-sm);
+        padding: 6px 12px;
+        margin: 4px 0 12px;
         opacity: 1;
         visibility: visible;
         transform: none;
         display: none;
       }
       .nav-item.open-sub .nav-dropdown {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .dropdown-link {
+        padding: 10px 8px;
+        font-size: 0.92rem;
+        color: var(--text-muted);
+        border-bottom: 1px dashed #e2e8f0;
+      }
+      .dropdown-link:last-child {
+        border-bottom: none;
+      }
+      .header-cta-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px;
+        font-size: 1rem;
       }
       .hero-title {
         font-size: 2.1rem;
@@ -2303,9 +2364,9 @@
 <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           +91-7327078543 / 9668464875
         </a>
-<a href="/cdn-cgi/l/email-protection#aeccc7dacccfdcc9cfc1c09c9e9c98eec9c3cfc7c280cdc1c3">
+<a href="/cdn-cgi/l/email-protection#f4969d8096958693959b9ac6c4c6c2b49399959d98da979b99">
 <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span class="__cf_email__" data-cfemail="a0c2c9d4c2c1d2c7c1cfce92909296e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</span>
+          <span class="__cf_email__" data-cfemail="ef8d869b8d8e9d888e8081dddfddd9af88828e8683c18c8082">[email&#160;protected]</span>
         </a>
 </div>
 <div class="top-bar-links">
@@ -3205,8 +3266,8 @@
             <a href="tel:+917327078543" style="display: block; font-size: 0.88rem; font-weight: 700; color: var(--accent); text-decoration: none;">
               📞 +91-7327078543
             </a>
-            <a href="/cdn-cgi/l/email-protection#75171c0117140712141a1b47454743351218141c195b161a18" style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; text-decoration: none;">
-              <span class="__cf_email__" data-cfemail="75171c0117140712141a1b47454743351218141c195b161a18">[email&#160;protected]</span>
+            <a href="/cdn-cgi/l/email-protection#6c0e05180e0d1e0b0d03025e5c5e5a2c0b010d0500420f0301" style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; text-decoration: none;">
+              <span class="__cf_email__" data-cfemail="bbd9d2cfd9dac9dcdad4d5898b898dfbdcd6dad2d795d8d4d6">[email&#160;protected]</span>
             </a>
           </div>
         </div>
@@ -3527,7 +3588,7 @@
 <div class="faq-answer">
 <p><strong>Campus Address:</strong> Bargaon Institute of Technology, At/Po: Bargaon, Sundargarh, Odisha - 770016.<br/>
 <strong>Admissions Helpline:</strong> <a href="tel:+917327078543">+91-7327078543</a> / <a href="tel:+919668464875">+91-9668464875</a><br/>
-<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#a7c5ced3c5c6d5c0c6c8c995979591e7c0cac6cecb89c4c8ca"><span class="__cf_email__" data-cfemail="7a18130e181b081d1b1514484a484c3a1d171b131654191517">[email&#160;protected]</span></a></p>
+<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#0c6e65786e6d7e6b6d63623e3c3e3a4c6b616d6560226f6361"><span class="__cf_email__" data-cfemail="c1a3a8b5a3a0b3a6a0aeaff3f1f3f781a6aca0a8adefa2aeac">[email&#160;protected]</span></a></p>
 </div>
 </details>
 </div>
@@ -3566,7 +3627,7 @@
 </div>
 <div class="contact-line">
 <svg fill="none" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-<div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99fbf0edfbf8ebfef8f6f7aba9abafd9fef4f8f0f5b7faf6f4">[email&#160;protected]</a></div>
+<div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b0d2d9c4d2d1c2d7d1dfde82808286f0d7ddd1d9dc9ed3dfdd">[email&#160;protected]</a></div>
 </div>
 </div>
 <!-- ADMINISTRATIVE OFFICE -->
@@ -3688,7 +3749,7 @@
 <ul class="footer-links">
 <li><a href="tel:+917327078543">Helpline: +91-7327078543</a></li>
 <li><a href="tel:+919668464875">Counselor: +91-9668464875</a></li>
-<li><a href="/cdn-cgi/l/email-protection#25474c5147445742444a4b17151713654248444c490b464a48"><span class="__cf_email__" data-cfemail="12707b6670736075737d7c2022202452757f737b7e3c717d7f">[email&#160;protected]</span></a></li>
+<li><a href="/cdn-cgi/l/email-protection#8eece7faeceffce9efe1e0bcbebcb8cee9e3efe7e2a0ede1e3"><span class="__cf_email__" data-cfemail="c6a4afb2a4a7b4a1a7a9a8f4f6f4f086a1aba7afaae8a5a9ab">[email&#160;protected]</span></a></li>
 <li><a href="#contact">Grievance Redressal Cell</a></li>
 <li><a href="#contact">Anti-Ragging Committee</a></li>
 <li><a href="#contact">Women's Cell &amp; Internal Committee</a></li>
@@ -3805,22 +3866,65 @@
        JAVASCRIPT LOGIC
        =================================================================== -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Mobile navigation toggle
+    // ===================================================================
+    // ENHANCED MOBILE NAVIGATION & TOUCH SUPPORT (SMARTPHONES & TABLETS)
+    // ===================================================================
     const mobileToggle = document.getElementById('mobileToggle');
     const navMenu = document.getElementById('navMenu');
 
-    mobileToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-    });
+    if (mobileToggle && navMenu) {
+      // Toggle menu on click/tap
+      mobileToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = navMenu.classList.toggle('open');
+        mobileToggle.classList.toggle('active', isOpen);
+        mobileToggle.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
 
-    // Close menu when clicking link on mobile
-    document.querySelectorAll('.nav-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (navMenu.classList.contains('open') && !navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
           navMenu.classList.remove('open');
+          mobileToggle.classList.remove('active');
+          document.body.style.overflow = '';
         }
       });
-    });
+
+      // Handle dropdown toggles on mobile touch screens (About Us & Programs)
+      document.querySelectorAll('.nav-item').forEach(item => {
+        const dropdown = item.querySelector('.nav-dropdown');
+        const link = item.querySelector('.nav-link');
+        if (dropdown && link) {
+          link.addEventListener('click', (e) => {
+            if (window.innerWidth <= 991) {
+              e.preventDefault();
+              e.stopPropagation();
+              const wasOpen = item.classList.contains('open-sub');
+              // Close other open submenus
+              document.querySelectorAll('.nav-item.open-sub').forEach(other => {
+                if (other !== item) other.classList.remove('open-sub');
+              });
+              item.classList.toggle('open-sub', !wasOpen);
+            }
+          });
+        }
+      });
+
+      // Close menu and reset body scroll when any actual destination link is clicked
+      document.querySelectorAll('.nav-menu a').forEach(link => {
+        if (!link.parentElement.querySelector('.nav-dropdown') || link.classList.contains('dropdown-link')) {
+          link.addEventListener('click', () => {
+            if (window.innerWidth <= 991) {
+              navMenu.classList.remove('open');
+              mobileToggle.classList.remove('active');
+              document.body.style.overflow = '';
+            }
+          });
+        }
+      });
+    }
 
     // Filter Academic Programs
     function filterPrograms(category) {
@@ -4051,7 +4155,8 @@
     });
   
 
-  STUDY NOTES & FACULTY UPLOAD LOGIC
+  /* ===================================================================
+     STUDY NOTES & FACULTY UPLOAD LOGIC
      =================================================================== */
 
   const INITIAL_NOTES_DATA = [
@@ -4352,7 +4457,6 @@
   });
 
   
-  /* ===================================================================
   </script>
 </body>
 </html>
