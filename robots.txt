@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://ndebasish671-rgb.github.io/bit-bargaon/sitemap.xml
+Sitemap: https://bitbargaon.in/sitemap.xml
