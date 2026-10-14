@@ -232,37 +232,7 @@
     }
   ]
 }
-  
-    // Slide-out Drawer Controls (Pro Mobile Menu)
-    function openDrawer() {
-      const drawer = document.getElementById('proDrawer');
-      const overlay = document.getElementById('drawerOverlay');
-      if (drawer && overlay) {
-        drawer.classList.add('active');
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
 
-    function closeDrawer() {
-      const drawer = document.getElementById('proDrawer');
-      const overlay = document.getElementById('drawerOverlay');
-      if (drawer && overlay) {
-        drawer.classList.remove('active');
-        overlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-
-    function toggleProAccordion(btn) {
-      const parent = btn.closest('.pro-accordion');
-      if (!parent) return;
-      const wasOpen = parent.classList.contains('open');
-      document.querySelectorAll('.pro-accordion').forEach(acc => acc.classList.remove('open'));
-      if (!wasOpen) {
-        parent.classList.add('open');
-      }
-    }
 
   </script>
 <style>
@@ -4328,6 +4298,37 @@
     document.addEventListener('DOMContentLoaded', fixProtectedEmails);
     setTimeout(fixProtectedEmails, 500);
 
+    
+    // Slide-out Drawer Controls (Pro Mobile Menu)
+    function openDrawer() {
+      const drawer = document.getElementById('proDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      if (drawer && overlay) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('proDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      if (drawer && overlay) {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function toggleProAccordion(btn) {
+      const parent = btn.closest('.pro-accordion');
+      if (!parent) return;
+      const wasOpen = parent.classList.contains('open');
+      document.querySelectorAll('.pro-accordion').forEach(acc => acc.classList.remove('open'));
+      if (!wasOpen) {
+        parent.classList.add('open');
+      }
+    }
   </script>
 </body>
 </html>
