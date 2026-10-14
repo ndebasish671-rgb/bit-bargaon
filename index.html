@@ -232,6 +232,38 @@
     }
   ]
 }
+  
+    // Slide-out Drawer Controls (Pro Mobile Menu)
+    function openDrawer() {
+      const drawer = document.getElementById('proDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      if (drawer && overlay) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeDrawer() {
+      const drawer = document.getElementById('proDrawer');
+      const overlay = document.getElementById('drawerOverlay');
+      if (drawer && overlay) {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function toggleProAccordion(btn) {
+      const parent = btn.closest('.pro-accordion');
+      if (!parent) return;
+      const wasOpen = parent.classList.contains('open');
+      document.querySelectorAll('.pro-accordion').forEach(acc => acc.classList.remove('open'));
+      if (!wasOpen) {
+        parent.classList.add('open');
+      }
+    }
+
   </script>
 <style>
     /* =====================================================================
@@ -2277,6 +2309,200 @@
       background: #c59b27;
     }
 
+  
+    /* =====================================================================
+       PRO SLIDE-OUT DRAWER (MATCHING USER SCREENSHOT EXACTLY)
+       ===================================================================== */
+    .pro-drawer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(5, 13, 26, 0.75);
+      backdrop-filter: blur(4px);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 9998;
+    }
+    .pro-drawer-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .pro-drawer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 320px;
+      max-width: 85vw;
+      height: 100%;
+      background: #03152e; /* Exact deep collegiate navy from screenshot */
+      color: #ffffff;
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 10px 0 35px rgba(0, 0, 0, 0.5);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .pro-drawer.active {
+      transform: translateX(0);
+    }
+
+    .pro-drawer-header {
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .pro-drawer-close {
+      background: transparent;
+      border: none;
+      color: #c084fc; /* Purple/lilac accent exactly as screenshot */
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      padding: 6px 0;
+    }
+    .pro-drawer-close svg {
+      stroke: #c084fc;
+    }
+
+    .pro-drawer-nav {
+      flex: 1;
+      padding: 10px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pro-drawer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      transition: var(--transition);
+    }
+    .pro-drawer-item:hover, .pro-drawer-item.active {
+      background: rgba(197, 155, 39, 0.12);
+      color: #facc15;
+    }
+
+    .pro-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pro-icon {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .pro-arrow {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      transition: transform 0.25s ease;
+    }
+
+    .pro-accordion {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .pro-accordion-trigger {
+      width: 100%;
+      background: transparent;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 22px;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    .pro-accordion-trigger:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: #facc15;
+    }
+
+    .pro-accordion.open .pro-arrow {
+      transform: rotate(90deg);
+      color: #facc15;
+    }
+
+    .pro-accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      background: #020c1b;
+      transition: max-height 0.3s ease-out;
+      display: flex;
+      flex-direction: column;
+    }
+    .pro-accordion.open .pro-accordion-panel {
+      max-height: 400px;
+    }
+
+    .pro-sub-link {
+      padding: 10px 22px 10px 38px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+    .pro-sub-link:hover {
+      color: #facc15;
+      background: rgba(197, 155, 39, 0.08);
+      padding-left: 44px;
+    }
+
+    .pro-sub-all {
+      padding: 11px 22px 11px 38px;
+      color: #facc15;
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .pro-drawer-footer {
+      padding: 20px 22px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pro-drawer-phone {
+      color: #e2e8f0;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .pro-drawer-cta {
+      background: linear-gradient(135deg, #c59b27 0%, #9a7313 100%);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 4px;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
   </style>
 </head>
 <body>
@@ -2291,9 +2517,9 @@
 <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           +91-7327078543 / 9668464875
         </a>
-<a href="/cdn-cgi/l/email-protection#72101b0610130015131d1c4042404432151f131b1e5c111d1f">
+<a href="mailto:bitbargaon2026@gmail.com">
 <svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span class="__cf_email__" data-cfemail="2143485543405346404e4f1311131761464c40484d0f424e4c">[email&#160;protected]</span>
+          bitbargaon2026@gmail.com
         </a>
 </div>
 <div class="top-bar-links">
@@ -2340,36 +2566,43 @@
 <!-- NAVIGATION LINKS -->
 <nav>
 <ul class="nav-menu" id="navMenu">
-<li class="nav-item active"><a class="nav-link" href="#home">Home</a></li>
+<li class="nav-item active"><a class="nav-link" href="index.html">Home</a></li>
 <li class="nav-item">
-<a class="nav-link" href="#about">About Us ▾</a>
+<a class="nav-link" href="about.html">About Us ▾</a>
 <div class="nav-dropdown">
-<a class="dropdown-link" href="#about">Overview &amp; History</a>
-<a class="dropdown-link" href="#mission">Vision &amp; Mission</a>
-<a class="dropdown-link" href="#trust">About the Trust</a>
-<a class="dropdown-link" href="#leadership">Leadership &amp; Messages</a>
-<a class="dropdown-link" href="#affiliations">Approvals &amp; Governance</a>
+<a class="dropdown-link" href="about.html#overview">Overview &amp; Profile</a>
+<a class="dropdown-link" href="about.html#vision">Vision &amp; Mission</a>
+<a class="dropdown-link" href="about.html#leadership">Principal &amp; Leadership</a>
+<a class="dropdown-link" href="about.html#approvals">AICTE &amp; SCTE&amp;VT Approvals</a>
+<a class="dropdown-link" href="about.html" style="color: var(--accent); font-weight: 700;">View Full About Page →</a>
 </div>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="#programs">Programs ▾</a>
+<a class="nav-link" href="academics.html">Academics ▾</a>
 <div class="nav-dropdown">
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('diploma')">Mining Engineering (Diploma)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('diploma')">Mechanical Engineering (Diploma)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('diploma')">Artificial Intelligence &amp; ML (AIML)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('diploma')">Electrical Engineering (Diploma)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('diploma')">Civil Engineering (Diploma)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('mgmt')">MBA (2 Years Full-Time)</a>
-<a class="dropdown-link" href="#programs" onclick="filterPrograms('mgmt')">BBA (3 Years Full-Time)</a>
+<a class="dropdown-link" href="academics.html#mining">Mining Engineering (Diploma)</a>
+<a class="dropdown-link" href="academics.html#aiml">AI &amp; Machine Learning (Diploma)</a>
+<a class="dropdown-link" href="academics.html#mechanical">Mechanical Engineering (Diploma)</a>
+<a class="dropdown-link" href="academics.html#electrical">Electrical Engineering (Diploma)</a>
+<a class="dropdown-link" href="academics.html#civil">Civil Engineering (Diploma)</a>
+<a class="dropdown-link" href="academics.html#mgmt">MBA &amp; BBA Management</a>
+<a class="dropdown-link" href="academics.html" style="color: var(--accent); font-weight: 700;">All Academic Programs →</a>
 </div>
 </li>
-<li class="nav-item"><a class="nav-link" href="#diploma-sundargarh">Diploma Sundargarh</a></li>
-<li class="nav-item"><a class="nav-link" href="#admissions">Admissions</a></li>
-<li class="nav-item"><a class="nav-link" href="#fees" style="color: #10b981; font-weight: 700;">Fees & Dues</a></li>
-<li class="nav-item"><a class="nav-link" href="#facilities">Campus Facilities</a></li>
-<li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-<li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-<li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="facilities.html">Facilities</a></li>
+<li class="nav-item"><a class="nav-link" href="placement.html">Placement</a></li>
+<li class="nav-item">
+<a class="nav-link" href="student-corner.html">Student Corner ▾</a>
+<div class="nav-dropdown">
+<a class="dropdown-link" href="https://debxtech.infinityfree.io/login.php" target="_blank" rel="noopener" style="color: #c59b27; font-weight: 800;">💳 Online Fees &amp; Dues Portal ↗</a>
+<a class="dropdown-link" href="student-corner.html#scholarships">State &amp; National Scholarships</a>
+<a class="dropdown-link" href="student-corner.html#sams">SAMS Odisha Portal</a>
+<a class="dropdown-link" href="student-corner.html#exam">Exam Rules &amp; SCTE&amp;VT Calendar</a>
+</div>
+</li>
+<li class="nav-item"><a class="nav-link" href="committee.html">Committee</a></li>
+<li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="nav-item"><a class="nav-link" href="https://debxtech.infinityfree.io/login.php" target="_blank" rel="noopener" style="color: #10b981; font-weight: 800;">💳 Fees Portal ↗</a></li>
 <li class="nav-item">
 <button class="header-cta-btn" onclick="openAdmissionModal()">
 <span>Apply Now 2026-27</span>
@@ -2378,11 +2611,148 @@
 </li>
 </ul>
 </nav>
-<button aria-label="Toggle Navigation" class="mobile-toggle" id="mobileToggle">
+<button aria-label="Toggle Navigation" class="mobile-toggle" id="mobileToggle" onclick="openDrawer()">
 <svg fill="none" stroke-width="2.5" viewbox="0 0 24 24"><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg>
 </button>
 </div>
 </header>
+
+<!-- SLIDE-OUT PRO DRAWER NAVIGATION (EXACTLY MATCHING USER SCREENSHOT) -->
+<div class="pro-drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+<aside class="pro-drawer" id="proDrawer" aria-label="Mobile Navigation">
+  <div class="pro-drawer-header">
+    <button class="pro-drawer-close" onclick="closeDrawer()" aria-label="Close Navigation">
+      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="6"></line></svg>
+      <span>Close</span>
+    </button>
+  </div>
+
+  <nav class="pro-drawer-nav">
+    <!-- Home -->
+    <a href="index.html" class="pro-drawer-item active">
+      <span class="pro-item-left"><span class="pro-icon">⌂</span> Home</span>
+    </a>
+
+    <!-- About Us Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">About Us</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="about.html#overview" class="pro-sub-link">Overview &amp; Profile</a>
+        <a href="about.html#vision" class="pro-sub-link">Vision, Mission &amp; Values</a>
+        <a href="about.html#leadership" class="pro-sub-link">Principal &amp; Leadership</a>
+        <a href="about.html#approvals" class="pro-sub-link">AICTE &amp; SCTE&amp;VT Approvals</a>
+        <a href="about.html" class="pro-sub-all">View Full About Page →</a>
+      </div>
+    </div>
+
+    <!-- Academics Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Academics</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="academics.html#mining" class="pro-sub-link">Mining Engineering (Diploma)</a>
+        <a href="academics.html#aiml" class="pro-sub-link">AI &amp; Machine Learning (Diploma)</a>
+        <a href="academics.html#mechanical" class="pro-sub-link">Mechanical Engineering (Diploma)</a>
+        <a href="academics.html#electrical" class="pro-sub-link">Electrical Engineering (Diploma)</a>
+        <a href="academics.html#civil" class="pro-sub-link">Civil Engineering (Diploma)</a>
+        <a href="academics.html#mgmt" class="pro-sub-link">MBA &amp; BBA Management</a>
+        <a href="academics.html" class="pro-sub-all">All Academic Programs →</a>
+      </div>
+    </div>
+
+    <!-- Facilities Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Facilities</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="facilities.html#library" class="pro-sub-link">Central Digital Library (DELNET)</a>
+        <a href="facilities.html#labs" class="pro-sub-link">Workshops &amp; Practical Labs</a>
+        <a href="facilities.html#transport" class="pro-sub-link">College Bus Fleet &amp; Transit</a>
+        <a href="facilities.html#smart-campus" class="pro-sub-link">Wi-Fi &amp; Smart Classrooms</a>
+        <a href="facilities.html" class="pro-sub-all">Explore Campus Facilities →</a>
+      </div>
+    </div>
+
+    <!-- Placement Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Placement</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="placement.html#tp-cell" class="pro-sub-link">Training &amp; Placement Cell</a>
+        <a href="placement.html#recruiters" class="pro-sub-link">Our Industry Recruiters</a>
+        <a href="placement.html#internships" class="pro-sub-link">Industrial Visits &amp; Training</a>
+        <a href="placement.html" class="pro-sub-all">View Placement Records →</a>
+      </div>
+    </div>
+
+    <!-- Student Corner Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Student Corner</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="https://debxtech.infinityfree.io/login.php" target="_blank" rel="noopener" class="pro-sub-link" style="color: #facc15; font-weight: 800;">💳 Online Fees &amp; Dues Portal ↗</a>
+        <a href="student-corner.html#scholarships" class="pro-sub-link">Scholarships (State &amp; National)</a>
+        <a href="student-corner.html#sams" class="pro-sub-link">SAMS Odisha Portal</a>
+        <a href="student-corner.html#exam" class="pro-sub-link">SCTE&amp;VT Academic Calendar</a>
+        <a href="student-corner.html" class="pro-sub-all">Open Student Corner →</a>
+      </div>
+    </div>
+
+    <!-- Committee Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Committee</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="committee.html#anti-ragging" class="pro-sub-link">Anti-Ragging Committee</a>
+        <a href="committee.html#grievance" class="pro-sub-link">Grievance Redressal Cell</a>
+        <a href="committee.html#icc" class="pro-sub-link">Internal Complaints Committee (Women)</a>
+        <a href="committee.html#sc-st" class="pro-sub-link">SC/ST Prevention Cell</a>
+        <a href="committee.html" class="pro-sub-all">AICTE Statutory Disclosures →</a>
+      </div>
+    </div>
+
+    <!-- Contact Us -->
+    <a href="contact.html" class="pro-drawer-item">
+      <span class="pro-item-left">Contact Us</span>
+      <span class="pro-arrow">→</span>
+    </a>
+
+    <!-- Useful links Accordion -->
+    <div class="pro-accordion">
+      <button class="pro-accordion-trigger" onclick="toggleProAccordion(this)">
+        <span class="pro-item-left">Useful links</span>
+        <span class="pro-arrow">→</span>
+      </button>
+      <div class="pro-accordion-panel">
+        <a href="https://skill.samsodisha.gov.in/Website/diploma/Diphome.aspx" target="_blank" rel="noopener" class="pro-sub-link">SAMS Odisha (Govt. of Odisha) ↗</a>
+        <a href="https://sctevt.odisha.gov.in/" target="_blank" rel="noopener" class="pro-sub-link">SCTE&amp;VT Official Portal ↗</a>
+        <a href="https://www.bput.ac.in/" target="_blank" rel="noopener" class="pro-sub-link">BPUT University Portal ↗</a>
+        <a href="https://www.aicte-india.org/" target="_blank" rel="noopener" class="pro-sub-link">AICTE New Delhi ↗</a>
+        <a href="https://scholarship.odisha.gov.in/website/scholarship-details" target="_blank" rel="noopener" class="pro-sub-link">Odisha State Scholarship ↗</a>
+        <a href="https://debxtech.infinityfree.io/login.php" target="_blank" rel="noopener" class="pro-sub-link" style="color: #facc15; font-weight: 800;">💳 Fees &amp; Dues Login ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pro-drawer-footer">
+    <a href="tel:+919437123456" class="pro-drawer-phone">📞 Helpline: +91 94371 23456</a>
+    <a href="https://debxtech.infinityfree.io/login.php" target="_blank" rel="noopener" class="pro-drawer-cta">Access Fees &amp; Dues Portal ↗</a>
+  </div>
+</aside>
+
 <!-- ===================================================================
        HERO BANNER
        =================================================================== -->
@@ -2464,13 +2834,13 @@
       </div>
     </a>
 
-    <a href="/cdn-cgi/l/email-protection#32505b4650534055535d5c0002000472555f535b5e1c515d5f" style="display: flex; align-items: center; gap: 12px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 14px; text-decoration: none; color: var(--primary); transition: var(--transition);" class="hover-lift">
+    <a href="mailto:bitbargaon2026@gmail.com" style="display: flex; align-items: center; gap: 12px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 12px 14px; text-decoration: none; color: var(--primary); transition: var(--transition);" class="hover-lift">
       <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(230, 126, 34, 0.12); color: var(--accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
       </div>
       <div style="overflow: hidden;">
         <div style="font-size: 0.74rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Campus Email</div>
-        <div style="font-size: 0.92rem; font-weight: 700; color: var(--primary); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;"><span class="__cf_email__" data-cfemail="89ebe0fdebe8fbeee8e6e7bbb9bbbfc9eee4e8e0e5a7eae6e4">[email&#160;protected]</span></div>
+        <div style="font-size: 0.92rem; font-weight: 700; color: var(--primary); white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">bitbargaon2026@gmail.com</div>
       </div>
     </a>
   </div>
@@ -3218,8 +3588,8 @@
             <a href="tel:+917327078543" style="display: block; font-size: 0.88rem; font-weight: 700; color: var(--accent); text-decoration: none;">
               📞 +91-7327078543
             </a>
-            <a href="/cdn-cgi/l/email-protection#7e1c170a1c1f0c191f11104c4e4c483e19131f1712501d1113" style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; text-decoration: none;">
-              <span class="__cf_email__" data-cfemail="24464d5046455643454b4a16141612644349454d480a474b49">[email&#160;protected]</span>
+            <a href="mailto:bitbargaon2026@gmail.com" style="display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; text-decoration: none;">
+              bitbargaon2026@gmail.com
             </a>
           </div>
         </div>
@@ -3380,7 +3750,7 @@
 <div class="faq-answer">
 <p><strong>Campus Address:</strong> Bargaon Institute of Technology, At/Po: Bargaon, Sundargarh, Odisha - 770016.<br/>
 <strong>Admissions Helpline:</strong> <a href="tel:+917327078543">+91-7327078543</a> / <a href="tel:+919668464875">+91-9668464875</a><br/>
-<strong>Email:</strong> <a href="/cdn-cgi/l/email-protection#e5878c9187849782848a8bd7d5d7d3a58288848c89cb868a88"><span class="__cf_email__" data-cfemail="32505b4650534055535d5c0002000472555f535b5e1c515d5f">[email&#160;protected]</span></a></p>
+<strong>Email:</strong> <a href="mailto:bitbargaon2026@gmail.com">bitbargaon2026@gmail.com</a></p>
 </div>
 </details>
 </div>
@@ -3419,7 +3789,7 @@
 </div>
 <div class="contact-line">
 <svg fill="none" stroke-width="2" viewbox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-<div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="04666d7066657663656b6a36343632446369656d682a676b69">[email&#160;protected]</a></div>
+<div>bitbargaon2026@gmail.com</div>
 </div>
 </div>
 <!-- ADMINISTRATIVE OFFICE -->
@@ -3492,9 +3862,9 @@
     <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: var(--radius-md);">
       <div>
         <strong style="color: var(--primary); font-size: 0.96rem; display: block;">Official Campus Email</strong>
-        <span style="font-size: 0.82rem; color: var(--text-muted);"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e2808b9680839085838d8cd0d2d0d4a2858f838b8ecc818d8f">[email&#160;protected]</a></span>
+        <span style="font-size: 0.82rem; color: var(--text-muted);">bitbargaon2026@gmail.com</span>
       </div>
-      <a href="/cdn-cgi/l/email-protection#aeccc7dacccfdcc9cfc1c09c9e9c98eec9c3cfc7c280cdc1c3" class="btn-outline-sm" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">
+      <a href="mailto:bitbargaon2026@gmail.com" class="btn-outline-sm" style="padding: 8px 16px; font-size: 0.85rem; text-decoration: none;">
         <span>✉️ Email Us</span>
       </a>
     </div>
@@ -3559,7 +3929,7 @@
 <ul class="footer-links">
 <li><a href="tel:+917327078543">Helpline: +91-7327078543</a></li>
 <li><a href="tel:+919668464875">Counselor: +91-9668464875</a></li>
-<li><a href="/cdn-cgi/l/email-protection#a5c7ccd1c7c4d7c2c4cacb97959793e5c2c8c4ccc98bc6cac8"><span class="__cf_email__" data-cfemail="e4868d9086859683858b8ad6d4d6d2a48389858d88ca878b89">[email&#160;protected]</span></a></li>
+<li><a href="mailto:bitbargaon2026@gmail.com">bitbargaon2026@gmail.com</a></li>
 <li><a href="#contact">Grievance Redressal Cell</a></li>
 <li><a href="#contact">Anti-Ragging Committee</a></li>
 <li><a href="#contact">Women's Cell &amp; Internal Committee</a></li>
@@ -3670,7 +4040,7 @@
 <!-- ===================================================================
        JAVASCRIPT LOGIC
        =================================================================== -->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
     // ===================================================================
     // ENHANCED MOBILE NAVIGATION & TOUCH SUPPORT (SMARTPHONES & TABLETS)
     // ===================================================================
